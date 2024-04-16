@@ -56,6 +56,9 @@ const Categories = (props: Props) => {
                 display="flex"
                 justifyContent="space-between"
               >
+                <p>
+                  <img src={cat?.icon?.url} alt="" />
+                </p>
                 <p className="font-bold">{cat.name}</p>
                 <p>{cat.description}</p>
               </div>
@@ -122,10 +125,10 @@ const Categories = (props: Props) => {
                   ok?.cloudname +
                   "/auto/upload";
                 const imgData = await axios.post(url, formData).then((res) => {
-                  return (res.data);
+                  return res.data;
                 });
 
-               if (imgData?.secure_url && imgData?.public_id) {
+                if (imgData?.secure_url && imgData?.public_id) {
                   const data = {
                     name: category.name,
                     description: category.description,
@@ -137,7 +140,6 @@ const Categories = (props: Props) => {
                   postAxios(data);
                 }
               }
-              console.log("🚀 ~ onClick={ ~ ok?.apiKey:", ok?.apiKey);
             }}
           >
             Create Category
