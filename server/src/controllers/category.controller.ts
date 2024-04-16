@@ -53,13 +53,17 @@ export const createCategory = async (
       throw new OhError(400, "Category already exists");
     }
 
-    const { name, description, secure_url, public_id } = req.body;
+    const {
+      name,
+      description,
+      icon: { url, public_id },
+    } = req.body;
     const newCat = new categoryModel({
       name,
       description,
       icon: {
-        url: secure_url,
-        public_id: public_id,
+        url,
+        public_id,
       },
     });
     await newCat.save();
