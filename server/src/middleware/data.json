@@ -1,0 +1,40 @@
+[
+  {
+    "uid": "j2ExvVrQ7TfiaT2YF1cw6JGj8032",
+    "photo": "http://localhost:4000/uploads/1692188214426.jpg",
+    "name": "Nothox",
+    "email": "sunmaxboom2@gmail.com",
+    "friends": [
+      "j2ExvVrQ7TfiaT2YF1cw6JGj8032",
+      "j2ExvVrQ7TfiaT2YF1cw6JGj8032",
+      "wd1bSOXiA8ZgFRgtbIf1dDsptPE2",
+      "Y7mZLK0i85MRlWec7P04qnwRxcm2"
+    ],
+    "requests": [],
+    "likes": [],
+    "posts": [],
+    "isAdmin": false
+  },
+  {
+    "uid": "wd1bSOXiA8ZgFRgtbIf1dDsptPE2",
+    "photo": "https://lh3.googleusercontent.com/a/AAcHTtc6oINfB5suTEBcfte9hSysmC94LS94FWcEWRXCZ53c5YA=s96-c",
+    "name": "Sun Zim",
+    "email": "sanzimmahmud@gmail.com",
+    "friends": ["j2ExvVrQ7TfiaT2YF1cw6JGj8032", "Y7mZLK0i85MRlWec7P04qnwRxcm2"],
+    "requests": [],
+    "likes": [],
+    "posts": [],
+    "isAdmin": false
+  },
+  {
+    "uid": "Y7mZLK0i85MRlWec7P04qnwRxcm2",
+    "photo": "http://localhost:4000/uploads/1692255255270.jpg",
+    "name": "sanzim 71",
+    "email": "sanzim71@gmail.com",
+    "friends": ["j2ExvVrQ7TfiaT2YF1cw6JGj8032", "wd1bSOXiA8ZgFRgtbIf1dDsptPE2"],
+    "requests": [],
+    "likes": [],
+    "posts": [],
+    "isAdmin": false
+  }
+]
