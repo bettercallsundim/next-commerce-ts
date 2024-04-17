@@ -24,6 +24,18 @@ const productSchema = new Schema({
       public_id: String,
     },
   ],
+  colors: [
+    {
+      name: String,
+      code: String,
+    },
+  ],
+  sizes: [
+    {
+      type: String,
+      enum: ["XS", "S", "M", "L", "XL", "XXL"],
+    },
+  ],
   stock: {
     type: Number,
     required: [true, "Product stock is required"],
