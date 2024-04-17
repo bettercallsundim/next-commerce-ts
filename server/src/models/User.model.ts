@@ -17,10 +17,7 @@ const userSchema = new Schema({
     enum: ["user", "admin"],
     default: "user",
   },
-  avatar: {
-    url: String,
-    public_id: String,
-  },
+  avatar: String,
   address: {
     type: String,
     default: "",
@@ -58,9 +55,13 @@ const userSchema = new Schema({
 });
 
 userSchema.methods.JWT = function () {
-  return jwt.sign({ id: this._id, role: this.role }, process.env.JWT_SECRET as string, {
-    expiresIn: process.env.JWT_EXPIRE,
-  });
+  return jwt.sign(
+    { id: this._id, role: this.role },
+    process.env.JWT_SECRET as string,
+    {
+      expiresIn: process.env.JWT_EXPIRE,
+    }
+  );
 };
 const userModel = model("User", userSchema);
 export default userModel;

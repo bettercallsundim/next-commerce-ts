@@ -14,7 +14,11 @@ const Categories = (props: Props) => {
     icon: null,
   });
   const { data, loading, error } = useAxiosGet("/category/all");
-  const { data: postData, postAxios } = useAxiosPost("/category/create");
+  const {
+    data: postData,
+    postAxios,
+    error: postError,
+  } = useAxiosPost("/category/create");
   const [ok, setOk] = useState<any>({});
   const signForm = async () => {
     await axios
@@ -30,7 +34,6 @@ const Categories = (props: Props) => {
   useEffect(() => {
     console.log(ok, "ok");
   }, [ok]);
-  console.log(postData);
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
     clipPath: "inset(50%)",
