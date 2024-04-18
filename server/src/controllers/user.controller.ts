@@ -1,15 +1,15 @@
+import userModel from "@/models/User.model";
+import OhError from "@/utils/errorHandler";
 import { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler";
 import { Document, Schema } from "mongoose";
-import userModel from "../models/User.model";
-import OhError from "../utils/errorHandler";
 
 interface Cart {
   product: Schema.Types.ObjectId;
   quantity: number;
 }
 
-interface IUser extends Document {
+export interface IUser extends Document {
   name: string;
   email: string;
   role: "user" | "admin";
@@ -21,7 +21,6 @@ interface IUser extends Document {
   reviews: Schema.Types.ObjectId[];
   JWT: () => string;
 }
-
 
 export const signUp = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {

@@ -23,6 +23,7 @@
     "express-async-handler": "^1.2.0",
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.0",
+    "module-alias": "^2.2.3",
     "mongoose": "^7.2.4",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.13",
@@ -34,7 +35,12 @@
     "@types/cors": "^2.8.17",
     "@types/node": "^20.11.19",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.3"
   },
-  "description": ""
+  "description": "",
+  "_moduleAliases": {
+    "@"      : "dist"
+
+  }
 }
