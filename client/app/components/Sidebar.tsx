@@ -85,6 +85,7 @@ export default function PersistentDrawerLeft() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
+      {/* @ts-ignore */}
       <AppBar position="relative" open={open}>
         <Toolbar>
           <IconButton
@@ -150,6 +151,7 @@ export default function PersistentDrawerLeft() {
           ))}
         </List>
       </Drawer>
+      {/* @ts-ignore */}
       <Main open={open}>
         <DrawerHeader />
         <Typography paragraph>
