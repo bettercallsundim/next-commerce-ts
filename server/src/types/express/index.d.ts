@@ -1,11 +1,11 @@
-import { IUser } from "controllers/user.controller";
+// import { IUser } from "../controllers/user.controller";
 
 // export {};
 
-declare global {
-  namespace Express {
-    export interface Request {
-      user?: IUser;
-    }
-  }
-}
+// declare global {
+//   namespace Express {
+//     export interface Request {
+//       user?: IUser;
+//     }
+//   }
+// }

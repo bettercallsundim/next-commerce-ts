@@ -1,5 +1,5 @@
-import userModel from "@/models/User.model";
-import OhError from "@/utils/errorHandler";
+import userModel from "../models/User.model";
+import OhError from "../utils/errorHandler";
 import { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler";
 import { Document, Schema } from "mongoose";
@@ -60,6 +60,7 @@ export const signIn = asyncHandler(
     const token = user.JWT();
 
     res
+      .status(200)
       .cookie("token", token, {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 7,
@@ -68,5 +69,47 @@ export const signIn = asyncHandler(
         success: true,
         message: "Signed In Successfully !",
       });
+  }
+);
+
+export const signOut = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    res
+      .status(200)
+      .cookie("token", "", {
+        httpOnly: true,
+        maxAge: 1,
+      })
+      .json({
+        success: true,
+        message: "Signed Out Successfully !",
+      });
+  }
+);
+
+export const getUser = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    if (!id) {
+      throw new OhError(400, "User ID is required");
+    }
+    const user = await userModel.findById(id);
+    if (!user) {
+      throw new OhError(404, "User not found");
+    }
+    res.status(200).json({
+      success: true,
+      data: user,
+    });
+  }
+);
+
+export const getAllUser = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const users = await userModel.find();
+    res.status(200).json({
+      success: true,
+      data: users,
+    });
   }
 );
