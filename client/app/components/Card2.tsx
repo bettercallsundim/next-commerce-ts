@@ -3,8 +3,8 @@ import useStore from "@/zustand";
 import { Rating } from "@mui/material";
 import DottedButton from "./DottedButton";
 
-const Card2 = ({ product }) => {
-  const { title, description, price, thumbnail }= product;
+const Card2 = ({ product }: { product: any }) => {
+  const { title, description, price, thumbnail } = product;
   const store = useStore((state) => state);
   return (
     <div className="p-4  w-[12rem] rounded-md bg-sky-100 ">
@@ -28,7 +28,7 @@ const Card2 = ({ product }) => {
           <Rating size="small" name="read-only" value={4} readOnly />
           <span className="text-gray-500 text-xs ml-1">( 4320 )</span>
         </p>
-        <p className="my-0 mt-1" onClick={()=>store.addToCart(product)}>
+        <p className="my-0 mt-1" onClick={() => store.addToCart(product)}>
           <DottedButton text="Add To Cart" size="small" />
         </p>
       </div>
