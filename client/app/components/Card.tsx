@@ -16,7 +16,7 @@ const Card = () => {
           <p className="font-bold">HP Notebook E231</p>
           <p>Price : $231</p>
           <p>
-            <DottedButton text="Buy Now" />
+            <DottedButton text="Buy Now" size="small" />
           </p>
         </div>
       </div>
