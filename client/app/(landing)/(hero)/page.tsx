@@ -84,15 +84,15 @@ export default function Home() {
       <h1 className="flash">Flash Sale</h1>
       <div className="bg-secondary px-8 py-12 flex items-center justify-around ">
         <MultiSlider>
-          {products.map((product) => (
-            <Card2 key={product.id} product={product} />
+          {products.map((product, ind) => (
+            <Card2 key={ind} product={product} />
           ))}
         </MultiSlider>
       </div>
       <h1>Just For You</h1>
       <div className="bg-secondary px-8 py-12 grid  grid-cols-2 md:grid-cols-5 gap-4">
-        {products.map((product) => (
-          <Card2 key={product.id} product={product} />
+        {products.map((product, ind) => (
+          <Card2 key={ind} product={product} />
         ))}
       </div>
     </>

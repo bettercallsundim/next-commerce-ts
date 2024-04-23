@@ -26,29 +26,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const categoryRoutes_1 = __importDefault(require("./routes/categoryRoutes"));
+const cloudinary_1 = require("./utils/cloudinary");
+const errorHandler_1 = require("./utils/errorHandler");
 const compression_1 = __importDefault(require("compression"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv = __importStar(require("dotenv"));
 const express_1 = __importDefault(require("express"));
 const helmet_1 = __importDefault(require("helmet"));
+const redis_1 = __importDefault(require("./config/redis"));
 const db_1 = require("./db");
-const categoryRoutes_1 = __importDefault(require("./routes/categoryRoutes"));
-const cloudinary_1 = require("./utils/cloudinary");
-const errorHandler_1 = require("./utils/errorHandler");
 const app = (0, express_1.default)();
 dotenv.config();
+redis_1.default.connect().then(() => {
+    console.log("Redis connected");
+});
 //middlewares
 app.use((0, helmet_1.default)({
     crossOriginResourcePolicy: false,
 }));
 app.use((0, compression_1.default)());
 app.use((0, cors_1.default)({
-    origin: [
-        "http://localhost:3000",
-        "https://social-media-mern-lemon.vercel.app",
-        "http://192.168.1.7:3000",
-    ],
+    origin: [process.env.FRONTEND],
     credentials: true,
 }));
 app.use("/uploads", express_1.default.static("uploads"));
