@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import MailIcon from "@mui/icons-material/Mail";
@@ -23,6 +23,7 @@ import * as React from "react";
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
+  /* @ts-ignore */
   ({ theme, open }) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -41,8 +42,10 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   })
 );
 
+/* @ts-ignore */
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
+  /* @ts-ignore */
 })(({ theme, open }) => ({
   transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
