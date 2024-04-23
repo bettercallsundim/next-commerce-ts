@@ -55,9 +55,8 @@ const Categories = (props: Props) => {
             data.data.map((cat: any) => (
               <div
                 key={cat._id}
-                py={0}
-                display="flex"
-                justifyContent="space-between"
+                // display="flex"
+                // justifyContent="space-between"
               >
                 <p>
                   <img src={cat?.icon?.url} alt="" />
