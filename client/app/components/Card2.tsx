@@ -28,6 +28,8 @@ const Card2 = ({ product }: { product: any }) => {
           <Rating size="small" name="read-only" value={4} readOnly />
           <span className="text-gray-500 text-xs ml-1">( 4320 )</span>
         </p>
+        {/* @ts-ignore */}
+
         <p className="my-0 mt-1" onClick={() => store.addToCart(product)}>
           <DottedButton text="Add To Cart" size="small" />
         </p>
