@@ -27,6 +27,8 @@ const Carousel = (props) => {
   const autoplay = useRef(
     Autoplay(
       { delay: 3000, stopOnInteraction: false },
+      /* @ts-ignore */
+
       (emblaRoot) => emblaRoot.parentElement
     )
   );
