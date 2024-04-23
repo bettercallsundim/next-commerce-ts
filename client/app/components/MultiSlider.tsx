@@ -21,6 +21,8 @@ const responsive = {
     items: 1,
   },
 };
+
+/* @ts-ignore */
 const MultiSlider = memo(({ children }) => {
   return (
     <Carousel

@@ -1,13 +1,14 @@
-"use client"
+"use client";
 import useStore from "@/zustand";
 import Drawer from "@mui/material/Drawer";
 
-export default function Cart({open, toggleDrawer}) {
+export default function Cart({ open, toggleDrawer }) {
   const store = useStore((state) => state);
   console.log("🚀 ~ Card2 ~ store:", store);
   return (
     <Drawer anchor="right" open={open} onClose={toggleDrawer("right", false)}>
       <div className="w-[300px]">
+        {/* @ts-ignore */}
         {store.cartItems.map((item) => (
           <div key={item.id} className="flex justify-between items-center">
             <div>
@@ -22,12 +23,13 @@ export default function Cart({open, toggleDrawer}) {
               <p>${item.price}</p>
             </div>
             <div>
+              {/* @ts-ignore */}
               <button onClick={() => store.decreaseFromCart(item)}>-</button>
               <span>{item.quantity}</span>
+              {/* @ts-ignore */}
               <button onClick={() => store.addToCart(item)}>+</button>
             </div>
           </div>
-
         ))}
       </div>
     </Drawer>
