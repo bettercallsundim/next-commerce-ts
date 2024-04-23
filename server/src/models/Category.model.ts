@@ -8,7 +8,7 @@ const categorySchema = new Schema({
     public_id: String,
   },
   proudcts: {
-    type: [mongoose.Types.ObjectId],
+    type: [Schema.Types.ObjectId],
     ref: "Product",
     default: [],
   },

@@ -1,20 +1,21 @@
-import "module-alias/register";
-import categoryRoutes from "@/routes/categoryRoutes";
-import { apiKey, cloudName, signuploadform } from "@/utils/cloudinary";
-import { errorHandler } from "@/utils/errorHandler";
+import categoryRoutes from "./routes/categoryRoutes";
+import { apiKey, cloudName, signuploadform } from "./utils/cloudinary";
+import { errorHandler } from "./utils/errorHandler";
 import compression from "compression";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import * as dotenv from "dotenv";
 import express from "express";
 import helmet from "helmet";
-
+import redis from "./config/redis";
 import { connectDB } from "./db";
 
 const app = express();
 
 dotenv.config();
-
+redis.connect().then(() => {
+  console.log("Redis connected");
+});
 //middlewares
 app.use(
   helmet({

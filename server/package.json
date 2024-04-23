@@ -27,7 +27,8 @@
     "mongoose": "^7.2.4",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.13",
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.3",
+    "redis": "^4.6.13"
   },
   "devDependencies": {
     "@types/compression": "^1.7.5",
@@ -38,9 +39,5 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.3"
   },
-  "description": "",
-  "_moduleAliases": {
-    "@"      : "dist"
-
-  }
+  "description": ""
 }

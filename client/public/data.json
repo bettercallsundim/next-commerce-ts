@@ -1,0 +1,1702 @@
+[
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24174"
+    },
+    "name": "Truffle Paste",
+    "description": "Artisanal handcrafted bread",
+    "price": 156,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24175"
+    },
+    "name": "Soup - Verve - Chipotle Chicken",
+    "description": "Artisanal handcrafted bread",
+    "price": 415,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24176"
+    },
+    "name": "Pork - Back, Short Cut, Boneless",
+    "description": "Artisanal handcrafted bread",
+    "price": 557,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24177"
+    },
+    "name": "Cheese - Gouda Smoked",
+    "description": "Artisanal handcrafted bread",
+    "price": 944,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24178"
+    },
+    "name": "Chicken Thigh - Bone Out",
+    "description": "Locally sourced grass-fed beef",
+    "price": 817,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24179"
+    },
+    "name": "Veal - Provimi Inside",
+    "description": "Imported Italian pasta",
+    "price": 198,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2417a"
+    },
+    "name": "Grouper - Fresh",
+    "description": "Imported Italian pasta",
+    "price": 344,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2417b"
+    },
+    "name": "Wine - Redchard Merritt",
+    "description": "Fresh organic apples",
+    "price": 128,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2417c"
+    },
+    "name": "Tea - Lemon Scented",
+    "description": "Locally sourced grass-fed beef",
+    "price": 829,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2417d"
+    },
+    "name": "Toothpick Frilled",
+    "description": "Locally sourced grass-fed beef",
+    "price": 562,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2417e"
+    },
+    "name": "Sprouts - Pea",
+    "description": "Artisanal handcrafted bread",
+    "price": 909,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2417f"
+    },
+    "name": "Halibut - Whole, Fresh",
+    "description": "Locally sourced grass-fed beef",
+    "price": 818,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24180"
+    },
+    "name": "French Pastry - Mini Chocolate",
+    "description": "Locally sourced grass-fed beef",
+    "price": 786,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24181"
+    },
+    "name": "Lettuce - Curly Endive",
+    "description": "Imported Italian pasta",
+    "price": 871,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24182"
+    },
+    "name": "V8 - Berry Blend",
+    "description": "Locally sourced grass-fed beef",
+    "price": 263,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24183"
+    },
+    "name": "Chutney Sauce",
+    "description": "Artisanal handcrafted bread",
+    "price": 936,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24184"
+    },
+    "name": "Ecolab - Balanced Fusion",
+    "description": "Imported Italian pasta",
+    "price": 680,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24185"
+    },
+    "name": "Bread - Raisin",
+    "description": "Locally sourced grass-fed beef",
+    "price": 140,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24186"
+    },
+    "name": "Godiva White Chocolate",
+    "description": "Artisanal handcrafted bread",
+    "price": 274,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24187"
+    },
+    "name": "Cheese - Havarti, Roasted Garlic",
+    "description": "Locally sourced grass-fed beef",
+    "price": 760,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24188"
+    },
+    "name": "Soup - Cream Of Potato / Leek",
+    "description": "Organic free-range eggs",
+    "price": 637,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24189"
+    },
+    "name": "Garbage Bags - Black",
+    "description": "Locally sourced grass-fed beef",
+    "price": 835,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2418a"
+    },
+    "name": "Cheese - Cottage Cheese",
+    "description": "Artisanal handcrafted bread",
+    "price": 320,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2418b"
+    },
+    "name": "Bread - Crusty Italian Poly",
+    "description": "Fresh organic apples",
+    "price": 861,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2418c"
+    },
+    "name": "Beef - Rouladin, Sliced",
+    "description": "Organic free-range eggs",
+    "price": 795,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2418d"
+    },
+    "name": "Longos - Chicken Curried",
+    "description": "Artisanal handcrafted bread",
+    "price": 352,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2418e"
+    },
+    "name": "Syrup - Monin, Swiss Choclate",
+    "description": "Fresh organic apples",
+    "price": 138,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2418f"
+    },
+    "name": "Doilies - 8, Paper",
+    "description": "Imported Italian pasta",
+    "price": 265,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24190"
+    },
+    "name": "Beer - Camerons Cream Ale",
+    "description": "Fresh organic apples",
+    "price": 955,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24191"
+    },
+    "name": "Bread - Raisin Walnut Oval",
+    "description": "Artisanal handcrafted bread",
+    "price": 622,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24192"
+    },
+    "name": "Fruit Mix - Light",
+    "description": "Fresh organic apples",
+    "price": 593,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24193"
+    },
+    "name": "Bag - Bread, White, Plain",
+    "description": "Organic free-range eggs",
+    "price": 891,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24194"
+    },
+    "name": "Kolrabi",
+    "description": "Artisanal handcrafted bread",
+    "price": 146,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24195"
+    },
+    "name": "Mushroom - Trumpet, Dry",
+    "description": "Fresh organic apples",
+    "price": 532,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24196"
+    },
+    "name": "Langers - Ruby Red Grapfruit",
+    "description": "Artisanal handcrafted bread",
+    "price": 367,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24197"
+    },
+    "name": "Sage - Ground",
+    "description": "Artisanal handcrafted bread",
+    "price": 340,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24198"
+    },
+    "name": "Bread - White, Sliced",
+    "description": "Organic free-range eggs",
+    "price": 677,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a24199"
+    },
+    "name": "Puff Pastry - Slab",
+    "description": "Fresh organic apples",
+    "price": 167,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2419a"
+    },
+    "name": "Wine - Jafflin Bourgongone",
+    "description": "Locally sourced grass-fed beef",
+    "price": 983,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2419b"
+    },
+    "name": "Pomegranates",
+    "description": "Imported Italian pasta",
+    "price": 445,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2419c"
+    },
+    "name": "Nut - Macadamia",
+    "description": "Imported Italian pasta",
+    "price": 236,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2419d"
+    },
+    "name": "Brownies - Two Bite, Chocolate",
+    "description": "Organic free-range eggs",
+    "price": 113,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2419e"
+    },
+    "name": "Soup - Cream Of Broccoli, Dry",
+    "description": "Artisanal handcrafted bread",
+    "price": 211,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a2419f"
+    },
+    "name": "Cookies - Amaretto",
+    "description": "Artisanal handcrafted bread",
+    "price": 147,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a241a0"
+    },
+    "name": "Beer - Molson Excel",
+    "description": "Imported Italian pasta",
+    "price": 390,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a241a1"
+    },
+    "name": "Cake - Night And Day Choclate",
+    "description": "Locally sourced grass-fed beef",
+    "price": 667,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a241a2"
+    },
+    "name": "Fiddlehead - Frozen",
+    "description": "Imported Italian pasta",
+    "price": 881,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a241a3"
+    },
+    "name": "Cheese - Romano, Grated",
+    "description": "Artisanal handcrafted bread",
+    "price": 628,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a241a4"
+    },
+    "name": "Coffee Caramel Biscotti",
+    "description": "Imported Italian pasta",
+    "price": 297,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  },
+  {
+    "_id": {
+      "$oid": "66216d8afc13ae5814a241a5"
+    },
+    "name": "Cod - Salted, Boneless",
+    "description": "Organic free-range eggs",
+    "price": 457,
+    "category": "661ee64d13f24656aac2aa42",
+    "images": [
+      {
+        "url": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+      },
+      {
+        "url": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      }
+    ],
+    "colors": [
+      {
+        "name": "Red",
+        "code": "#FF0000"
+      }
+    ],
+    "sizes": ["M", "L", "XL"],
+    "stock": 100,
+    "sold": 50,
+    "rating": 5,
+    "reviews": []
+  }
+]

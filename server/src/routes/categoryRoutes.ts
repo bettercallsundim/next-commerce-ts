@@ -2,8 +2,8 @@ import {
   createCategory,
   deleteCategory,
   getAllCategories,
-} from "@/controllers/category.controller";
-import { roleCheck } from "@/middleware/auth";
+} from "../controllers/category.controller";
+import { roleCheck } from "../middleware/auth";
 import express from "express";
 const router = express.Router();
 
