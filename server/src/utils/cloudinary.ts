@@ -12,7 +12,7 @@ function cloudinaryUpload(file: string, folder: string) {
     folder: folder,
   });
 }
-function deleteCloudinaryUpload(public_id: string) {
+async function deleteCloudinaryUpload(public_id: string) {
   return cloudinary.uploader.destroy(public_id);
 }
 

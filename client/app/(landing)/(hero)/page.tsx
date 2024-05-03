@@ -2,6 +2,7 @@
 import Card2 from "@/app/components/Card2";
 import Carousel from "@/app/components/Carousel";
 import MultiSlider from "@/app/components/MultiSlider";
+import SignIn from "@/app/components/SignIn";
 import { Divider } from "@mui/material";
 import axios from "axios";
 import Link from "next/link";
@@ -39,6 +40,9 @@ export default function Home() {
       {/* <div className="bg-black text-white mt-4 px-8 py-8 text-[30px] uppercase text-center">
         Eid Offer ! Every Item Will Get 10% Discount ! Claim Now !
       </div> */}
+      <div>
+        <SignIn />
+      </div>
       <div className="flex items-center gap-4 pt-6 pb-20 px-8 bg-sky-100 rounded-lg">
         <div className="category w-[50%] shadow-md py-4 px-6 rounded-lg bg-slate-200/45">
           <div className="category__title">

@@ -5,6 +5,7 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import MUI_Wrapper from "./components/MUI_Wrapper";
 import Navbar from "./components/Navbar";
+import GoogleProvider from "./components/GoogleProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
@@ -26,8 +27,10 @@ export default function RootLayout({
     <html lang="en">
       <body id="root" className={`${poppins.className} poppins`}>
         <MUI_Wrapper>
-          <Navbar />
-          {children}
+          <GoogleProvider>
+            <Navbar />
+            {children}
+          </GoogleProvider>
         </MUI_Wrapper>
       </body>
     </html>
