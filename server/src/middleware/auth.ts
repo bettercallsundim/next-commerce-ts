@@ -7,11 +7,11 @@ import asyncHandler from "express-async-handler";
 import type { JwtPayload } from "jsonwebtoken";
 import jwt from "jsonwebtoken";
 dotenv.config();
-interface Moga extends Request {
+export interface IRequest extends Request {
   user?: IUser;
 }
 export const authCheck = asyncHandler(
-  async (req: Moga, res: Response, next: NextFunction) => {
+  async (req: IRequest, res: Response, next: NextFunction) => {
     if (!req.cookies.token) {
       throw new OhError(400, "Token not found");
     }
@@ -30,10 +30,12 @@ export const authCheck = asyncHandler(
 );
 
 export const roleCheck = (...roles: string[]) => {
-  return asyncHandler(async (req: Moga, res: Response, next: NextFunction) => {
-    if (req.user && !roles.includes(req.user.role)) {
-      throw new OhError(403, "You are not authorized to access this route");
+  return asyncHandler(
+    async (req: IRequest, res: Response, next: NextFunction) => {
+      if (req.user && !roles.includes(req.user.role)) {
+        throw new OhError(403, "You are not authorized to access this route");
+      }
+      next();
     }
-    next();
-  });
+  );
 };

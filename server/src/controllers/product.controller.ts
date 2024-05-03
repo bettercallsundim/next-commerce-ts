@@ -3,6 +3,7 @@ import asyncHandler from "express-async-handler";
 import OhError from "../utils/errorHandler";
 import productModel from "../models/Product.model";
 import categoryModel from "../models/Category.model";
+import { deleteCloudinaryUpload } from "../utils/cloudinary";
 
 export const createProduct = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -53,6 +54,11 @@ export const editProduct = asyncHandler(
         $push: { products: req.params.id },
       });
     }
+    if (productFind) {
+      for (let i = 0; i < productFind.images.length; i++) {
+        await deleteCloudinaryUpload(productFind.images[i].public_id as string);
+      }
+    }
     const product = await productModel.findByIdAndUpdate(
       req.params.id,
       {
@@ -73,6 +79,57 @@ export const editProduct = asyncHandler(
     res.status(200).json({
       success: true,
       data: product,
+    });
+  }
+);
+
+export const deleteProduct = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const product = await productModel.findByIdAndDelete(req.params.id);
+    if (!product) {
+      throw new OhError(404, "Product not found");
+    }
+    await categoryModel.findByIdAndUpdate(product.category, {
+      $pull: { products: req.params.id },
+    });
+    res.status(200).json({
+      success: true,
+    });
+  }
+);
+
+export const getProducts = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const products = await productModel.find();
+    res.status(200).json({
+      success: true,
+      data: products,
+    });
+  }
+);
+
+export const getProduct = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const product = await productModel.findById(req.params.id);
+    if (!product) {
+      throw new OhError(404, "Product not found");
+    }
+    res.status(200).json({
+      success: true,
+      data: product,
+    });
+  }
+);
+
+export const getProductsByCategory = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const products = await productModel.find({ category: req.params.id });
+    if (!products) {
+      throw new OhError(404, "Products not found");
+    }
+    res.status(200).json({
+      success: true,
+      data: products,
     });
   }
 );
