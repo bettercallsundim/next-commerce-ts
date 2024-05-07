@@ -1,4 +1,5 @@
 "use client";
+import CloudinaryUploadButton from "@/app/components/CloudinaryUploadButton";
 import { useAxiosGet, useAxiosPost } from "@/hooks/useAxios";
 import { Box, Button, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -45,7 +46,6 @@ const Categories = (props: Props) => {
     whiteSpace: "nowrap",
     width: 1,
   });
-  console.log(data);
   return (
     <Box px={4}>
       <section>
@@ -111,36 +111,30 @@ const Categories = (props: Props) => {
               type="file"
             />
           </Button>
+          <CloudinaryUploadButton
+            cb={(data) => {
+
+              setCategory((prev: any) => {
+                return {
+                  ...prev,
+                  icon: {
+                    url: data.secure_url,
+                    public_id: data.public_id,
+                  },
+                };
+              });
+            }}
+          />
           <Button
             onClick={async () => {
               console.log(category);
-              if (category.name && category.description && category.icon) {
-                const formData = new FormData();
-                formData.append("file", category.icon);
-                formData.append("api_key", ok?.apiKey);
-                console.log(ok?.apiKey, "ok?.apiKey");
-                formData.append("timestamp", ok?.timestamp);
-                formData.append("signature", ok?.signature);
-                formData.append("folder", "signed_upload_demo_form");
-                const url =
-                  "https://api.cloudinary.com/v1_1/" +
-                  ok?.cloudname +
-                  "/auto/upload";
-                const imgData = await axios.post(url, formData).then((res) => {
-                  return res.data;
+              if (category.name && category.description && category.icon.url) {
+                postAxios(category);
+                setCategory({
+                  name: "",
+                  description: "",
+                  icon: null,
                 });
-
-                if (imgData?.secure_url && imgData?.public_id) {
-                  const data = {
-                    name: category.name,
-                    description: category.description,
-                    icon: {
-                      url: imgData.secure_url,
-                      public_id: imgData.public_id,
-                    },
-                  };
-                  postAxios(data);
-                }
               }
             }}
           >

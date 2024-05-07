@@ -39,6 +39,7 @@ export const signUp = asyncHandler(
       });
       res.status(201).json({
         success: true,
+        message: "User created successfully",
         data: user,
       });
     }
@@ -99,6 +100,7 @@ export const getUser = asyncHandler(
     }
     res.status(200).json({
       success: true,
+      message: "User found",
       data: user,
     });
   }
@@ -109,6 +111,7 @@ export const getAllUser = asyncHandler(
     const users = await userModel.find();
     res.status(200).json({
       success: true,
+      message: "Users found",
       data: users,
     });
   }
