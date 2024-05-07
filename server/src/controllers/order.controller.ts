@@ -4,6 +4,7 @@ import OhError from "../utils/errorHandler";
 import orderModel from "../models/Order.model";
 import productModel from "../models/Product.model";
 import { IRequest } from "../middleware/auth";
+import userModel from "../models/User.model";
 
 export const createOrder = asyncHandler(
   async (req: IRequest, res: Response, next: NextFunction) => {
@@ -12,6 +13,10 @@ export const createOrder = asyncHandler(
       throw new OhError(400, "All fields are required");
     }
     if (!req?.user?._id) {
+      throw new OhError(400, "User not found");
+    }
+    const user = await userModel.findById(req.user._id);
+    if (!user) {
       throw new OhError(400, "User not found");
     }
     let totalPrice = 0;
@@ -34,10 +39,13 @@ export const createOrder = asyncHandler(
       address,
       phone,
       totalPrice,
-      user: req.user._id,
+      user: req?.user?._id,
     });
+    user.orders.push(order._id);
+    await user.save();
     res.status(201).json({
       success: true,
+      message: "Order created successfully",
       data: order,
     });
   }
@@ -57,6 +65,7 @@ export const changeOrderStatus = asyncHandler(
     await order.save();
     res.status(200).json({
       success: true,
+      message: "Order status changed successfully",
       data: order,
     });
   }
@@ -83,6 +92,7 @@ export const cancelOrder = asyncHandler(
     await order.save();
     res.status(200).json({
       success: true,
+      message: "Order cancelled successfully",
       data: order,
     });
   }
@@ -93,6 +103,7 @@ export const getOrders = asyncHandler(
     const orders = await orderModel.find();
     res.status(200).json({
       success: true,
+      message: "Orders fetched successfully",
       data: orders,
     });
   }
@@ -106,6 +117,7 @@ export const getOrder = asyncHandler(
     }
     res.status(200).json({
       success: true,
+      message: "Order fetched successfully",
       data: order,
     });
   }
@@ -116,6 +128,18 @@ export const getOrdersByUser = asyncHandler(
     const orders = await orderModel.find({ user: req.params.id });
     res.status(200).json({
       success: true,
+      message: "Orders fetched successfully",
+      data: orders,
+    });
+  }
+);
+
+export const getOrdersByStatus = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const orders = await orderModel.find({ orderStatus: req.params.status });
+    res.status(200).json({
+      success: true,
+      message: "Orders fetched successfully",
       data: orders,
     });
   }

@@ -14,10 +14,10 @@ export const createProduct = asyncHandler(
       !description ||
       !price ||
       !category ||
-      !images ||
+      images.length < 1 ||
       !colors ||
       !sizes ||
-      !stock
+      !(stock >= 0)
     ) {
       throw new OhError(400, "All fields are required");
     }
@@ -36,6 +36,7 @@ export const createProduct = asyncHandler(
     });
     res.status(201).json({
       success: true,
+      message: "Product created successfully",
       data: product,
     });
   }
@@ -45,7 +46,13 @@ export const editProduct = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { name, description, price, category, images, colors, sizes, stock } =
       req.body;
+
     const productFind = await productModel.findById(req.params.id);
+
+    if (!productFind) {
+      throw new OhError(404, "Product not found");
+    }
+
     if (productFind && productFind.category !== category) {
       await categoryModel.findByIdAndUpdate(productFind.category, {
         $pull: { products: req.params.id },
@@ -54,11 +61,13 @@ export const editProduct = asyncHandler(
         $push: { products: req.params.id },
       });
     }
+
     if (productFind) {
       for (let i = 0; i < productFind.images.length; i++) {
         await deleteCloudinaryUpload(productFind.images[i].public_id as string);
       }
     }
+
     const product = await productModel.findByIdAndUpdate(
       req.params.id,
       {
@@ -73,11 +82,10 @@ export const editProduct = asyncHandler(
       },
       { new: true }
     );
-    if (!product) {
-      throw new OhError(404, "Product not found");
-    }
+
     res.status(200).json({
       success: true,
+      message: "Product updated successfully",
       data: product,
     });
   }
@@ -85,15 +93,25 @@ export const editProduct = asyncHandler(
 
 export const deleteProduct = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const product = await productModel.findByIdAndDelete(req.params.id);
+    const product = await productModel.findById(req.params.id);
+
     if (!product) {
       throw new OhError(404, "Product not found");
     }
+
+    for (let i = 0; i < product.images.length; i++) {
+      await deleteCloudinaryUpload(product.images[i].public_id as string);
+    }
+
+    await productModel.findByIdAndDelete(req.params.id);
+
     await categoryModel.findByIdAndUpdate(product.category, {
       $pull: { products: req.params.id },
     });
+
     res.status(200).json({
       success: true,
+      message: "Product deleted successfully",
     });
   }
 );
@@ -103,6 +121,7 @@ export const getProducts = asyncHandler(
     const products = await productModel.find();
     res.status(200).json({
       success: true,
+      message: "Products fetched successfully",
       data: products,
     });
   }
@@ -116,6 +135,7 @@ export const getProduct = asyncHandler(
     }
     res.status(200).json({
       success: true,
+      message: "Product fetched successfully",
       data: product,
     });
   }
@@ -129,6 +149,7 @@ export const getProductsByCategory = asyncHandler(
     }
     res.status(200).json({
       success: true,
+      message: "Products fetched successfully",
       data: products,
     });
   }
