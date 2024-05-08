@@ -143,7 +143,7 @@ export const getProduct = asyncHandler(
 
 export const getProductsByCategory = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const products = await productModel.find({ category: req.params.id });
+    const products = await productModel.find({ category: req.params.category });
     if (!products) {
       throw new OhError(404, "Products not found");
     }
