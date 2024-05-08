@@ -121,7 +121,7 @@ exports.getProduct = (0, express_async_handler_1.default)((req, res, next) => __
     });
 }));
 exports.getProductsByCategory = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const products = yield Product_model_1.default.find({ category: req.params.id });
+    const products = yield Product_model_1.default.find({ category: req.params.category });
     if (!products) {
         throw new errorHandler_1.default(404, "Products not found");
     }

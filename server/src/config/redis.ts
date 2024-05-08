@@ -1,5 +1,6 @@
+import dotenv from "dotenv";
 import { createClient } from "redis";
-
+dotenv.config();
 const client = createClient({
   password: process.env.REDIS_PASS,
   socket: {
