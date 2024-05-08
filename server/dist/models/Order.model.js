@@ -24,7 +24,10 @@ const orderSchema = new mongoose_1.Schema({
         type: String,
         required: [true, "Address is required"],
     },
-    phone: Number,
+    phone: {
+        type: String,
+        required: [true, "Phone number is required"],
+    },
     totalPrice: {
         type: Number,
         required: [true, "Total price is required"],

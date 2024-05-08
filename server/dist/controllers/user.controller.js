@@ -33,6 +33,7 @@ exports.signUp = (0, express_async_handler_1.default)((req, res, next) => __awai
         });
         res.status(201).json({
             success: true,
+            message: "User created successfully",
             data: user,
         });
     }
@@ -81,6 +82,7 @@ exports.getUser = (0, express_async_handler_1.default)((req, res, next) => __awa
     }
     res.status(200).json({
         success: true,
+        message: "User found",
         data: user,
     });
 }));
@@ -88,6 +90,7 @@ exports.getAllUser = (0, express_async_handler_1.default)((req, res, next) => __
     const users = yield User_model_1.default.find();
     res.status(200).json({
         success: true,
+        message: "Users found",
         data: users,
     });
 }));
