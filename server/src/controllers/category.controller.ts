@@ -43,6 +43,7 @@ export const createCategory = asyncHandler(
       name,
       description,
       icon: { url, public_id },
+      parent,
     } = req.body;
     if (!name || !description || !url || !public_id) {
       throw new OhError(400, "All fields are required");
@@ -51,16 +52,30 @@ export const createCategory = asyncHandler(
     if (oldCat) {
       throw new OhError(400, "Category already exists");
     }
-
-    const newCat = new categoryModel({
+    let parentCat;
+    if (parent) {
+      parentCat = await categoryModel.findById(parent);
+    }
+    if (parent && !parentCat) {
+      throw new OhError(400, "Parent category not found");
+    }
+    let categoryData: any = {
       name,
       description,
       icon: {
         url,
         public_id,
       },
-    });
+    };
+    if (parentCat) {
+      categoryData.parent = parentCat._id;
+    }
+    const newCat = new categoryModel(categoryData);
     await newCat.save();
+    if (parentCat) {
+      parentCat.childrens.push(newCat._id);
+      await parentCat.save();
+    }
     res.status(200).json({
       message: "Category created successfully",
       data: newCat,
@@ -70,7 +85,47 @@ export const createCategory = asyncHandler(
 
 export const getAllCategories = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const categories = await categoryModel.find();
+    const categories = await categoryModel.aggregate([
+      {
+        $graphLookup: {
+          from: "categories",
+          startWith: "$_id",
+          connectFromField: "_id",
+          connectToField: "parent",
+          as: "subcategories",
+          maxDepth: 5,
+        },
+      },
+    ]);
+    // restrictSearchWithMatch: { childrens: { $exists: true, $ne: [] } },
+
+    res.status(200).json({
+      success: true,
+      data: categories,
+    });
+  }
+);
+export const getAllCategoriesTree = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const categories = await categoryModel.aggregate([
+      {
+        $match: {
+          parent: null, // Filter to select only categories with parent equal to null
+        },
+      },
+      {
+        $graphLookup: {
+          from: "categories",
+          startWith: "$_id",
+          connectFromField: "_id",
+          connectToField: "parent",
+          as: "subcategories",
+          maxDepth: 5,
+        },
+      },
+    ]);
+    // restrictSearchWithMatch: { childrens: { $exists: true, $ne: [] } },
+
     res.status(200).json({
       success: true,
       data: categories,
@@ -82,17 +137,17 @@ export const deleteCategory = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const findCategory = await categoryModel.findById(req.body._id);
     if (findCategory && findCategory.icon && findCategory.icon.public_id) {
-      await deleteCloudinaryUpload(findCategory.icon.public_id).then(
-        async () => {
-          await categoryModel.findByIdAndDelete(req.body._id);
-          return res.status(200).json({
-            success: true,
-            message: "Category removed",
-          });
-        }
-      );
-    } else {
-      throw new OhError(400, "Opps, Category delete error, Not found");
+      await deleteCloudinaryUpload(findCategory.icon.public_id);
     }
+    findCategory &&
+      (await categoryModel.findByIdAndUpdate(findCategory.parent, {
+        $pull: { childrens: findCategory._id },
+      }));
+
+    await categoryModel.findByIdAndDelete(req.body._id);
+    res.status(200).json({
+      success: true,
+      message: "Category removed",
+    });
   }
 );

@@ -12,6 +12,17 @@ const categorySchema = new Schema({
     ref: "Product",
     default: [],
   },
+  parent:{
+    type: Schema.Types.ObjectId,
+    ref: "Category",
+    default: null,
+  },
+  childrens: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Category",
+    },
+  ],
 });
 
 const categoryModel = model("Category", categorySchema);

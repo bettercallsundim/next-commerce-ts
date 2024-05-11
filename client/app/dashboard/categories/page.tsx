@@ -1,7 +1,8 @@
 "use client";
+import Category from "@/app/components/Category";
 import CloudinaryUploadButton from "@/app/components/CloudinaryUploadButton";
 import { useAxiosGet, useAxiosPost } from "@/hooks/useAxios";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, MenuItem, Select, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
 
@@ -13,8 +14,12 @@ const Categories = (props: Props) => {
     name: "",
     description: "",
     icon: null,
+    parent: "",
   });
+  const [categories, setCategories] = useState<any>([]);
+
   const { data, loading, error } = useAxiosGet("/category/all");
+  const { data: categoryTree } = useAxiosGet("/category/all/tree");
   const {
     data: postData,
     postAxios,
@@ -33,8 +38,22 @@ const Categories = (props: Props) => {
     signForm();
   }, []);
   useEffect(() => {
-    console.log(ok, "ok");
-  }, [ok]);
+    let tempCats = [];
+    if (data?.data?.length > 0) {
+      data?.data?.forEach((cat) => {
+        tempCats.push(cat);
+        cat.subcategories.forEach((sub) => {
+          tempCats.push(sub);
+        });
+      });
+      setCategories([...tempCats]);
+      console.log(tempCats, "tempCats");
+    }
+  }, [data]);
+  useEffect(() => {
+    console.log("🚀 ~ Categories ~ categories:", categories);
+  }, [categories]);
+
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
     clipPath: "inset(50%)",
@@ -51,25 +70,33 @@ const Categories = (props: Props) => {
       <section>
         <h1>All Categories</h1>
         <div>
-          {data &&
-            data.data.map((cat: any) => (
-              <div
-                key={cat._id}
-                // display="flex"
-                // justifyContent="space-between"
-              >
-                <p>
-                  <img src={cat?.icon?.url} alt="" />
-                </p>
-                <p className="font-bold">{cat.name}</p>
-                <p>{cat.description}</p>
-              </div>
+          {categoryTree?.data?.length &&
+            categoryTree.data.map((cat: any) => (
+              <Category key={cat._id} cat={cat} />
             ))}
         </div>
       </section>
       <section>
         <h1>Create Categories</h1>
         <div>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={category.parent}
+            label="Parent"
+            onChange={(e) => {
+              setCategory({
+                ...category,
+                parent: e.target.value,
+              });
+            }}
+          >
+            {data?.data?.map((cat: any) => (
+              <MenuItem key={cat._id} value={cat._id}>
+                {cat.name}
+              </MenuItem>
+            ))}
+          </Select>
           <TextField
             id="outlined-controlled"
             name="name"
@@ -113,7 +140,6 @@ const Categories = (props: Props) => {
           </Button>
           <CloudinaryUploadButton
             cb={(data) => {
-
               setCategory((prev: any) => {
                 return {
                   ...prev,
@@ -134,6 +160,7 @@ const Categories = (props: Props) => {
                   name: "",
                   description: "",
                   icon: null,
+                  parent: "",
                 });
               }
             }}
