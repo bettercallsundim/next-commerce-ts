@@ -1,6 +1,10 @@
+"use client";
 import Breadcrumb from "@/app/components/Breadcrumb";
-import { Rating, Button } from "@mui/material";
+import { Button, Rating } from "@mui/material";
 import React from "react";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
 
 type Props = {};
 const sampleProduct = {
@@ -8,27 +12,36 @@ const sampleProduct = {
     $oid: "66216d8afc13ae5814a24174",
   },
   name: "Truffle Paste",
-  description: "Artisanal handcrafted bread",
+  description:
+    "Truffle Paste is a is a delicious and healthy food is a delicious and healthy food is a delicious and healthy food  is a delicious and healthy food is a delicious and healthy food is a delicious and healthy food is a delicious and healthy food is a delicious and healthy food is a delicious and healthy food is a delicious and healthy food delicious and healthy food. ",
   price: 156,
-  category: "661ee64d13f24656aac2aa42",
+  category: "Electronics",
   images: [
     {
       url: "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg",
+      public_id: "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg",
     },
     {
       url: "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg",
+      public_id: "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg",
     },
     {
       url: "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg",
+      public_id: "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg",
     },
     {
       url: "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg",
+      public_id: "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg",
     },
   ],
   colors: [
     {
       name: "Red",
       code: "#FF0000",
+    },
+    {
+      name: "Blue",
+      code: "skyblue",
     },
   ],
   sizes: ["M", "L", "XL"],
@@ -42,8 +55,35 @@ const product = (props: Props) => {
     <div className="px-8 py-8">
       <Breadcrumb />
       <div className="productBox grid grid-cols-2">
-        <div className="imageGallery rounded-md">
-          <img src={sampleProduct.images[0].url} alt="" />
+        <div className="imageGallery  rounded-md">
+          <ImageGallery
+            items={sampleProduct.images.map((img) => ({
+              original: img.url,
+              thumbnail: img.url,
+            }))}
+            showNav={false}
+            showFullscreenButton={false}
+            showPlayButton={false}
+            renderLeftNav={(onClick, disabled) => (
+              <button
+                className="image-gallery-icon image-gallery-left-nav text-5xl"
+                disabled={disabled}
+                onClick={onClick}
+              >
+                <FaArrowLeft />
+              </button>
+            )}
+            renderRightNav={(onClick, disabled) => (
+              <button
+                className="image-gallery-icon image-gallery-right-nav text-5xl"
+                disabled={disabled}
+                onClick={onClick}
+              >
+                <FaArrowRight />
+              </button>
+            )}
+          />
+          ;
         </div>
         <div className="introduction">
           <h2 className="title">{sampleProduct.name}</h2>

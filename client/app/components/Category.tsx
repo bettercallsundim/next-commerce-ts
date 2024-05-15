@@ -5,11 +5,7 @@ type Props = {};
 const Category = ({ cat }: any) => {
   return (
     <div className="pl-8">
-      <div
-
-      // display="flex"
-      // justifyContent="space-between"
-      >
+      <div     >
         <p>
           <img src={cat?.icon?.url} alt="" />
         </p>
