@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "~react-image-gallery/styles/css/image-gallery.css";
 
 .poppins {
   font-family: "Poppins", sans-serif !important;
@@ -188,3 +187,4 @@ li {
   width: 300px;
   border-radius: 10px;
 }
+/* @import "~react-image-gallery/styles/css/image-gallery.css"; */

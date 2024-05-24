@@ -2,20 +2,22 @@ import express from "express";
 import {
   getAllUser,
   getUser,
+  manageCart,
   signIn,
   signOut,
   signUp,
 } from "../controllers/user.controller";
-import { roleCheck } from "../middleware/auth";
+import { authCheck, roleCheck } from "../middleware/auth";
 const router = express.Router();
 
 // auth routes
 router.post("/sign-up", signUp);
 router.post("/sign-in", signIn);
-router.get("/sign-out", signOut);
+router.get("/sign-out", authCheck, signOut);
 
 // user routes
-router.get("/:id", getUser);
-router.get("/all",roleCheck("admin"), getAllUser);
+router.get("/:id", authCheck, getUser);
+router.post("/manage-cart", authCheck, manageCart);
+router.get("/all", authCheck, roleCheck("admin"), getAllUser);
 
 export default router;

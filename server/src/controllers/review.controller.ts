@@ -1,12 +1,10 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import asyncHandler from "express-async-handler";
-import OhError from "../utils/errorHandler";
 import productModel from "../models/Product.model";
-import categoryModel from "../models/Category.model";
-import { deleteCloudinaryUpload } from "../utils/cloudinary";
-import { IRequest } from "../middleware/auth";
 import reviewModel from "../models/Review.model";
 import userModel from "../models/User.model";
+import { IRequest } from "../types/express";
+import OhError from "../utils/errorHandler";
 
 export const createReview = asyncHandler(
   async (req: IRequest, res: Response, next: NextFunction) => {

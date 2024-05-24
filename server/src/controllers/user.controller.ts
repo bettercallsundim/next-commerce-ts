@@ -1,26 +1,8 @@
-import userModel from "../models/User.model";
-import OhError from "../utils/errorHandler";
 import { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler";
-import { Document, Schema } from "mongoose";
-
-interface Cart {
-  product: Schema.Types.ObjectId;
-  quantity: number;
-}
-
-export interface IUser extends Document {
-  name: string;
-  email: string;
-  role: "user" | "admin";
-  avatar: string;
-  address: string;
-  wishlist: Schema.Types.ObjectId[];
-  cart: Cart[];
-  orders: Schema.Types.ObjectId[];
-  reviews: Schema.Types.ObjectId[];
-  JWT: () => string;
-}
+import userModel from "../models/User.model";
+import { CartItem, IRequest, IUser } from "../types/express";
+import OhError from "../utils/errorHandler";
 
 export const signUp = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -101,6 +83,25 @@ export const getUser = asyncHandler(
     res.status(200).json({
       success: true,
       message: "User found",
+      data: user,
+    });
+  }
+);
+
+export const manageCart = asyncHandler(
+  async (req: IRequest, res: Response, next: NextFunction) => {
+    const cart: CartItem[] | [] = req.body.cart;
+
+    const user: IUser | null = await userModel.findById(req?.user?._id);
+    if (!user) {
+      throw new OhError(404, "User not found");
+    }
+
+    user.cart = cart;
+    await user.save();
+    res.status(200).json({
+      success: true,
+      message: "Cart updated successfully",
       data: user,
     });
   }

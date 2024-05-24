@@ -1,11 +1,17 @@
-import React from 'react'
+import Link from "next/link";
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 const Products = (props: Props) => {
   return (
-    <div>Products</div>
-  )
-}
+    <div>
+      <div>Products</div>
+      <div>
+        <Link href="/dashboard/products/create">Create Product</Link>
+      </div>
+    </div>
+  );
+};
 
-export default Products
+export default Products;
