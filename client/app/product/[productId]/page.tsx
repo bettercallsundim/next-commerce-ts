@@ -55,7 +55,7 @@ const product = (props: Props) => {
     <div className="px-8 py-8">
       <Breadcrumb />
       <div className="productBox grid grid-cols-2">
-        <div className="imageGallery  rounded-md">
+        <div className="imageGallery sticky  rounded-md">
           <ImageGallery
             items={sampleProduct.images.map((img) => ({
               original: img.url,
@@ -103,18 +103,18 @@ const product = (props: Props) => {
             </span>
           </p>
           <p>
-            Price : ${sampleProduct.price} <del>$ 200</del>
+            Price : <b>${sampleProduct.price}</b> <del>$ 200</del>
           </p>
           <p>
             <p>Color</p>
-            <p>
+            <p className="flex items-center  gap-x-2 flex-wrap">
               {sampleProduct.colors.map((col, ind) => (
                 <span
                   key={col.code}
                   style={{
                     backgroundColor: col.code,
                   }}
-                  className="rounded-md p-2 text-white"
+                  className="rounded-full py-1 px-2 text-white"
                 >
                   {col.name}
                 </span>
@@ -123,9 +123,9 @@ const product = (props: Props) => {
           </p>
           <p>
             <p>Size</p>
-            <p className="flex items-center gap-x-4">
+            <p className="flex items-center gap-x-2 text-sm flex-wrap">
               {sampleProduct.sizes.map((size, ind) => (
-                <span key={size} className="rounded-md p-2 bg-gray-300">
+                <span key={size} className="rounded-full py-1 px-4 bg-gray-300">
                   {size}
                 </span>
               ))}

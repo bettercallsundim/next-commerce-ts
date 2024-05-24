@@ -1,10 +1,10 @@
+import { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler";
-import { Request, Response, NextFunction } from "express";
-import OhError from "../utils/errorHandler";
 import orderModel from "../models/Order.model";
 import productModel from "../models/Product.model";
-import { IRequest } from "../middleware/auth";
 import userModel from "../models/User.model";
+import { IRequest } from "../types/express";
+import OhError from "../utils/errorHandler";
 
 export const createOrder = asyncHandler(
   async (req: IRequest, res: Response, next: NextFunction) => {

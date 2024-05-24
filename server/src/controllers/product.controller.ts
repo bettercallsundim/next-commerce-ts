@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler";
-import OhError from "../utils/errorHandler";
-import productModel from "../models/Product.model";
 import categoryModel from "../models/Category.model";
+import productModel from "../models/Product.model";
 import { deleteCloudinaryUpload } from "../utils/cloudinary";
+import OhError from "../utils/errorHandler";
 
 export const createProduct = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
