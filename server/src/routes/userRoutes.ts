@@ -5,13 +5,11 @@ import {
   manageCart,
   signIn,
   signOut,
-  signUp,
 } from "../controllers/user.controller";
 import { authCheck, roleCheck } from "../middleware/auth";
 const router = express.Router();
 
 // auth routes
-router.post("/sign-up", signUp);
 router.post("/sign-in", signIn);
 router.get("/sign-out", authCheck, signOut);
 

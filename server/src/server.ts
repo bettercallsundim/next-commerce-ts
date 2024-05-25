@@ -27,22 +27,23 @@ redis
   });
 //middlewares
 app.use(
-  helmet({
-    crossOriginResourcePolicy: false,
-  })
-);
-app.use(compression());
-app.use(
   cors({
     origin: [process.env.FRONTEND as string],
     credentials: true,
   })
 );
+app.use(cookieParser());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: false,
+  })
+);
+app.use(compression());
+
 app.use("/uploads", express.static("uploads"));
 app.disable("x-powered-by");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 
 //routes
 app.get("/cloudinary-auth", function (req, res, next) {

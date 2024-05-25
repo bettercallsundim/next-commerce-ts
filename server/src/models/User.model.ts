@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import mongoose, { Schema, model } from "mongoose";
+import { IUser } from "../types";
 dotenv.config();
 const userSchema = new Schema({
   name: {
@@ -63,5 +64,5 @@ userSchema.methods.JWT = function () {
     }
   );
 };
-const userModel = model("User", userSchema);
+const userModel = model<IUser>("User", userSchema);
 export default userModel;

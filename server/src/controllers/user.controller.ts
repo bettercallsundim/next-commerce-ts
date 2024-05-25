@@ -1,52 +1,35 @@
 import { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler";
 import userModel from "../models/User.model";
-import { CartItem, IRequest, IUser } from "../types/express";
+import { CartItem, IRequest, IUser } from "../types";
 import OhError from "../utils/errorHandler";
-
-export const signUp = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { name, email, avatar } = req.body;
-    if (!name || !email) {
-      throw new OhError(400, "All fields are required");
-    }
-    const exists = await userModel.findOne({ email });
-    if (exists) {
-      throw new OhError(400, "User already exists");
-    } else {
-      const user = await userModel.create({
-        name,
-        email,
-        avatar,
-      });
-      res.status(201).json({
-        success: true,
-        message: "User created successfully",
-        data: user,
-      });
-    }
-  }
-);
 
 export const signIn = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { email } = req.body;
-    if (!email) {
-      throw new OhError(400, "Email is required");
+    const { name, email, picture: avatar } = req.body;
+    if (!name || !email || !avatar) {
+      throw new OhError(400, "All fields are required");
     }
-    const user = (await userModel.findOne({ email })) as IUser;
-
+    let user: IUser | null = await userModel.findOne({ email });
     if (!user) {
-      throw new OhError(400, "User not found");
+      user = await userModel.create({
+        name,
+        email,
+        avatar,
+        role: "user",
+      });
     }
-
+    if (!user) {
+      throw new OhError(400, "User not created");
+    }
     const token = user.JWT();
-
+    console.log("🚀 ~ token:", token);
+    // .status(200)
     res
-      .status(200)
       .cookie("token", token, {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 7,
+        secure: true,
       })
       .json({
         success: true,

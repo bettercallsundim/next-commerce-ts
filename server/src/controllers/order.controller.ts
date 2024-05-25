@@ -3,9 +3,8 @@ import asyncHandler from "express-async-handler";
 import orderModel from "../models/Order.model";
 import productModel from "../models/Product.model";
 import userModel from "../models/User.model";
-import { IRequest } from "../types/express";
+import { IRequest, Order, OrderStatus } from "../types";
 import OhError from "../utils/errorHandler";
-
 export const createOrder = asyncHandler(
   async (req: IRequest, res: Response, next: NextFunction) => {
     const { products, address, phone } = req.body;
@@ -34,14 +33,21 @@ export const createOrder = asyncHandler(
       foundProduct.sold += product.quantity;
       await foundProduct.save();
     });
-    const order = await orderModel.create({
+    const order: Order = await orderModel.create({
       products,
       address,
       phone,
       totalPrice,
       user: req?.user?._id,
     });
+    if (!order) {
+      throw new OhError(400, "Order not created");
+    }
+    if (!user.orders) {
+      user.orders = [];
+    }
     user.orders.push(order._id);
+
     await user.save();
     res.status(201).json({
       success: true,
@@ -77,7 +83,7 @@ export const cancelOrder = asyncHandler(
     if (!order) {
       throw new OhError(404, "Order not found");
     }
-    if (order.orderStatus === "Cancelled") {
+    if (order.orderStatus === OrderStatus.Cancelled) {
       throw new OhError(400, "Order already cancelled");
     }
     order.products.forEach(async (product: any) => {
@@ -88,7 +94,7 @@ export const cancelOrder = asyncHandler(
         await foundProduct.save();
       }
     });
-    order.orderStatus = "Cancelled";
+    order.orderStatus = OrderStatus.Cancelled;
     await order.save();
     res.status(200).json({
       success: true,
