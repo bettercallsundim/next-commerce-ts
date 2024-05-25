@@ -3,7 +3,7 @@ import asyncHandler from "express-async-handler";
 import productModel from "../models/Product.model";
 import reviewModel from "../models/Review.model";
 import userModel from "../models/User.model";
-import { IRequest } from "../types/express";
+import { IRequest, Review } from "../types";
 import OhError from "../utils/errorHandler";
 
 export const createReview = asyncHandler(
@@ -25,13 +25,14 @@ export const createReview = asyncHandler(
       throw new OhError(400, "Review already exists");
     }
 
-    const review = await reviewModel.create({
+    const review: Review = await reviewModel.create({
       user: req.user._id,
       product,
       rating,
       comment,
     });
     product.reviews.push(review._id);
+    if (!user.reviews) user.reviews = [];
     user.reviews.push(review._id);
     Promise.all([product.save(), user.save()]);
     res.status(201).json({

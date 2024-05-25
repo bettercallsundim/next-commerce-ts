@@ -4,7 +4,7 @@ import asyncHandler from "express-async-handler";
 import type { JwtPayload } from "jsonwebtoken";
 import jwt from "jsonwebtoken";
 import userModel from "../models/User.model";
-import { IRequest, IUser } from "../types/express";
+import { IRequest, IUser } from "../types";
 import OhError from "../utils/errorHandler";
 dotenv.config();
 

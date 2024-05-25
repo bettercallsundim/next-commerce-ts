@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { Review } from "../types";
 
 const reviewSchema = new Schema(
   {
@@ -26,5 +27,5 @@ const reviewSchema = new Schema(
   }
 );
 
-const reviewModel = model("Review", reviewSchema);
+const reviewModel = model<Review>("Review", reviewSchema);
 export default reviewModel;

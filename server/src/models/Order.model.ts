@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { Order } from "../types";
 
 const orderSchema = new Schema(
   {
@@ -45,5 +46,5 @@ const orderSchema = new Schema(
   }
 );
 
-const orderModel = model("Order", orderSchema);
+const orderModel = model<Order>("Order", orderSchema);
 export default orderModel;
