@@ -12,7 +12,7 @@ import productRoutes from "./routes/productRoutes";
 import reviewRoutes from "./routes/reviewRoutes";
 import userRoutes from "./routes/userRoutes";
 import { apiKey, cloudName, signuploadform } from "./utils/cloudinary";
-import { errorHandler } from "./utils/errorHandler";
+import OhError, { errorHandler } from "./utils/errorHandler";
 
 const app = express();
 
@@ -25,6 +25,7 @@ redis
   .catch((err) => {
     console.log("Redis connection failed", err);
   });
+
 //middlewares
 app.use(
   cors({
@@ -60,6 +61,11 @@ app.use("/category", categoryRoutes);
 app.use("/product", productRoutes);
 app.use("/order", orderRoutes);
 app.use("/review", reviewRoutes);
+
+app.use("*", (req, res, next) => {
+  throw new OhError(400, "Route not exists");
+});
+
 
 app.use(errorHandler);
 

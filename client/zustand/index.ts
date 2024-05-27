@@ -1,12 +1,23 @@
 import { create } from "zustand";
-const useStore = create((set) => ({
+
+interface ZustandStates {
+  cartItemsNumber: number;
+  cartItems: any;
+  user: any;
+  setUser: (user: any) => void;
+  addToCart: (item: any) => void;
+  decreaseFromCart: (item: any) => void;
+}
+
+const useStore = create<ZustandStates>((set) => ({
   cartItemsNumber: 0,
   cartItems: [],
+  user: null,
+  setUser: (user: any) => set({ user }),
   addToCart: (item: any) =>
     set((state: any) => {
       let items = state.cartItems;
       let itemFound = items.findIndex((i: any) => i.id === item.id);
-      console.log(item, itemFound, items);
       if (itemFound !== -1) {
         items[itemFound].quantity += 1;
         return { cartItems: items, cartItemsNumber: state.cartItemsNumber + 1 };

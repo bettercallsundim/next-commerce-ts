@@ -5,16 +5,16 @@ type Props = {};
 const Category = ({ cat }: any) => {
   return (
     <div className="pl-8">
-      <div     >
+      <div>
         <p>
           <img src={cat?.icon?.url} alt="" />
         </p>
         <p className="font-bold">{cat.name}</p>
         <p>{cat.description}</p>
       </div>
-      {cat?.subcategories?.length && (
+      {cat?.childrens?.length && (
         <div>
-          {cat.subcategories.map((child: any) => (
+          {cat.childrens.map((child: any) => (
             <Category key={child._id} cat={child} />
           ))}
         </div>

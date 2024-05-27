@@ -42,17 +42,17 @@ const Categories = (props: Props) => {
     if (data?.data?.length > 0) {
       data?.data?.forEach((cat) => {
         tempCats.push(cat);
-        cat.subcategories.forEach((sub) => {
+        cat.subcats.forEach((sub) => {
           tempCats.push(sub);
         });
       });
       setCategories([...tempCats]);
-      console.log(tempCats, "tempCats");
     }
   }, [data]);
   useEffect(() => {
     console.log("🚀 ~ Categories ~ categories:", categories);
-  }, [categories]);
+    console.log("🚀 ~ Categories ~ tree:", categoryTree);
+  }, [categories, categoryTree]);
 
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
@@ -70,8 +70,8 @@ const Categories = (props: Props) => {
       <section>
         <h1>All Categories</h1>
         <div>
-          {categoryTree?.data?.length &&
-            categoryTree.data.map((cat: any) => (
+          {categoryTree?.categories?.length &&
+            categoryTree.categories.map((cat: any) => (
               <Category key={cat._id} cat={cat} />
             ))}
         </div>
@@ -155,6 +155,7 @@ const Categories = (props: Props) => {
             onClick={async () => {
               console.log(category);
               if (category.name && category.description && category.icon.url) {
+
                 postAxios(category);
                 setCategory({
                   name: "",

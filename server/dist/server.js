@@ -40,7 +40,7 @@ const productRoutes_1 = __importDefault(require("./routes/productRoutes"));
 const reviewRoutes_1 = __importDefault(require("./routes/reviewRoutes"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const cloudinary_1 = require("./utils/cloudinary");
-const errorHandler_1 = require("./utils/errorHandler");
+const errorHandler_1 = __importStar(require("./utils/errorHandler"));
 const app = (0, express_1.default)();
 dotenv.config();
 redis_1.default
@@ -52,19 +52,19 @@ redis_1.default
     console.log("Redis connection failed", err);
 });
 //middlewares
-app.use((0, helmet_1.default)({
-    crossOriginResourcePolicy: false,
-}));
-app.use((0, compression_1.default)());
 app.use((0, cors_1.default)({
     origin: [process.env.FRONTEND],
     credentials: true,
 }));
+app.use((0, cookie_parser_1.default)());
+app.use((0, helmet_1.default)({
+    crossOriginResourcePolicy: false,
+}));
+app.use((0, compression_1.default)());
 app.use("/uploads", express_1.default.static("uploads"));
 app.disable("x-powered-by");
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
-app.use((0, cookie_parser_1.default)());
 //routes
 app.get("/cloudinary-auth", function (req, res, next) {
     const sig = (0, cloudinary_1.signuploadform)();
@@ -80,6 +80,9 @@ app.use("/category", categoryRoutes_1.default);
 app.use("/product", productRoutes_1.default);
 app.use("/order", orderRoutes_1.default);
 app.use("/review", reviewRoutes_1.default);
+app.use("*", (req, res, next) => {
+    throw new errorHandler_1.default(400, "Route not exists");
+});
 app.use(errorHandler_1.errorHandler);
 //db connection
 (0, db_1.connectDB)();

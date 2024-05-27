@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCategory = exports.getAllCategories = exports.createCategory = exports.createCategoryWithMulter = void 0;
+exports.deleteCategory = exports.getBreadcrumbs = exports.getAllCategoriesTree = exports.getAllCategories = exports.createCategory = exports.createCategoryWithMulter = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const Category_model_1 = __importDefault(require("../models/Category.model"));
 const cloudinary_1 = require("../utils/cloudinary");
@@ -27,7 +27,7 @@ exports.createCategoryWithMulter = (0, express_async_handler_1.default)((req, re
         yield (0, cloudinary_1.cloudinaryUpload)((_a = req === null || req === void 0 ? void 0 : req.file) === null || _a === void 0 ? void 0 : _a.path, "category").then((resp) => __awaiter(void 0, void 0, void 0, function* () {
             if (resp.secure_url) {
                 const { name, description } = req.body;
-                const newCat = new Category_model_1.default({
+                const categories = new Category_model_1.default({
                     name,
                     description,
                     icon: {
@@ -35,10 +35,10 @@ exports.createCategoryWithMulter = (0, express_async_handler_1.default)((req, re
                         public_id: resp.public_id,
                     },
                 });
-                yield newCat.save();
+                yield categories.save();
                 res.status(200).json({
                     message: "Category created successfully",
-                    data: newCat,
+                    data: categories,
                 });
             }
             else {
@@ -51,7 +51,7 @@ exports.createCategoryWithMulter = (0, express_async_handler_1.default)((req, re
     }
 }));
 exports.createCategory = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, description, icon: { url, public_id }, } = req.body;
+    const { name, description, icon: { url, public_id }, parent, } = req.body;
     if (!name || !description || !url || !public_id) {
         throw new errorHandler_1.default(400, "All fields are required");
     }
@@ -59,39 +59,137 @@ exports.createCategory = (0, express_async_handler_1.default)((req, res, next) =
     if (oldCat) {
         throw new errorHandler_1.default(400, "Category already exists");
     }
-    const newCat = new Category_model_1.default({
+    let parentCat;
+    if (parent) {
+        parentCat = yield Category_model_1.default.findById(parent);
+    }
+    if (parent && !parentCat) {
+        throw new errorHandler_1.default(400, "Parent category not found");
+    }
+    let categoryData = {
         name,
         description,
         icon: {
             url,
             public_id,
         },
-    });
-    yield newCat.save();
+    };
+    if (parentCat) {
+        categoryData.parent = parentCat._id;
+    }
+    const categories = new Category_model_1.default(categoryData);
+    yield categories.save();
+    if (parentCat) {
+        parentCat.childrens.push(categories._id);
+        yield parentCat.save();
+    }
     res.status(200).json({
         message: "Category created successfully",
-        data: newCat,
+        data: categories,
     });
 }));
 exports.getAllCategories = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const categories = yield Category_model_1.default.find();
+    // const categories = await categoryModel.find();
+    const categories = yield Category_model_1.default.aggregate([
+        {
+            $graphLookup: {
+                from: "categories",
+                startWith: "$_id",
+                connectFromField: "_id",
+                connectToField: "parent",
+                as: "subcats",
+            },
+        },
+    ]);
+    // restrictSearchWithMatch: { childrens: { $exists: true, $ne: [] } },
     res.status(200).json({
         success: true,
         data: categories,
     });
 }));
+// get all categories in tree structure
+exports.getAllCategoriesTree = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const aggregateCategories = () => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            // Fetch root categories
+            const rootCategories = yield Category_model_1.default
+                .find({ parent: null })
+                .lean();
+            // Recursively fetch children for each root category
+            for (let i = 0; i < rootCategories.length; i++) {
+                rootCategories[i].childrens = yield fetchChildren(rootCategories[i]);
+            }
+            return rootCategories;
+        }
+        catch (error) {
+            console.error("Error aggregating categories:", error);
+            throw error;
+        }
+    });
+    const fetchChildren = (category) => __awaiter(void 0, void 0, void 0, function* () {
+        for (let i = 0; i < category.childrens.length; i++) {
+            const childId = category.childrens[i];
+            const childCategory = yield Category_model_1.default.findById(childId).lean();
+            if (childCategory) {
+                childCategory.childrens = yield fetchChildren(childCategory);
+                category.childrens[i] = childCategory;
+            }
+        }
+        return category.childrens;
+    });
+    let cats = yield aggregateCategories();
+    // aggregateCategories().then((result) => {
+    //   console.log(result, "result");
+    //   cats=result
+    // });
+    return res.json({
+        categories: cats,
+    });
+}));
+// get breadcrumbs/parents of a category
+exports.getBreadcrumbs = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { categoryId } = req.params;
+    let category = yield Category_model_1.default.findById(categoryId).lean();
+    let breadcrumbs = [];
+    if (category) {
+        breadcrumbs.push(category);
+        if (category.parent) {
+            yield fetchParents(category.parent);
+        }
+    }
+    function fetchParents(parentId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let parent = yield Category_model_1.default.findById(parentId).lean();
+            if (parent) {
+                breadcrumbs.push(parent);
+                if (parent.parent) {
+                    yield fetchParents(parent.parent);
+                }
+                else {
+                    return;
+                }
+            }
+        });
+    }
+    breadcrumbs.reverse();
+    return res.status(200).json({
+        success: true,
+        message: "Breadcrumbs fetched successfully",
+        breadcrumbs,
+    });
+}));
 exports.deleteCategory = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const findCategory = yield Category_model_1.default.findById(req.body._id);
     if (findCategory && findCategory.icon && findCategory.icon.public_id) {
-        yield (0, cloudinary_1.deleteCloudinaryUpload)(findCategory.icon.public_id).then(() => __awaiter(void 0, void 0, void 0, function* () {
-            yield Category_model_1.default.findByIdAndDelete(req.body._id);
-            return res.status(200).json({
-                success: true,
-                message: "Category removed",
-            });
+        yield (0, cloudinary_1.deleteCloudinaryUpload)(findCategory.icon.public_id);
+    }
+    findCategory &&
+        (yield Category_model_1.default.findByIdAndUpdate(findCategory.parent, {
+            $pull: { childrens: findCategory._id },
         }));
-    }
-    else {
-        throw new errorHandler_1.default(400, "Opps, Category delete error, Not found");
-    }
+    yield Category_model_1.default.findByIdAndDelete(req.body._id);
+    res.status(200).json({
+        success: true,
+        message: "Category removed",
+    });
 }));

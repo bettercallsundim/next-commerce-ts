@@ -13,14 +13,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.roleCheck = exports.authCheck = void 0;
-const User_model_1 = __importDefault(require("../models/User.model"));
-const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const User_model_1 = __importDefault(require("../models/User.model"));
+const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
 dotenv_1.default.config();
 exports.authCheck = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!req.cookies.token) {
+    var _a;
+    if (!((_a = req === null || req === void 0 ? void 0 : req.cookies) === null || _a === void 0 ? void 0 : _a.token)) {
         throw new errorHandler_1.default(400, "Token not found");
     }
     let token = req.cookies.token;

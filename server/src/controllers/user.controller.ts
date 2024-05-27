@@ -17,14 +17,12 @@ export const signIn = asyncHandler(
         email,
         avatar,
         role: "user",
-      });
+      })
     }
     if (!user) {
       throw new OhError(400, "User not created");
     }
     const token = user.JWT();
-    console.log("🚀 ~ token:", token);
-    // .status(200)
     res
       .cookie("token", token, {
         httpOnly: true,
@@ -33,6 +31,7 @@ export const signIn = asyncHandler(
       })
       .json({
         success: true,
+        user,
         message: "Signed In Successfully !",
       });
   }
