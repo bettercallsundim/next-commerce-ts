@@ -13,6 +13,17 @@ const categorySchema = new mongoose_1.Schema({
         ref: "Product",
         default: [],
     },
+    parent: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "Category",
+        default: null,
+    },
+    childrens: [
+        {
+            type: mongoose_1.Schema.Types.ObjectId,
+            ref: "Category",
+        },
+    ],
 });
 const categoryModel = (0, mongoose_1.model)("Category", categorySchema);
 exports.default = categoryModel;

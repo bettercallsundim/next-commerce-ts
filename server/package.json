@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon --exec ts-node src/server.ts",
+    "devs": "nodemon --exec ts-node src/server.ts",
+    "dev": "concurrently \"tsc --watch\" \"nodemon dist/server.js\"",
     "start": "node dist/server.js",
     "build": "tsc"
   },

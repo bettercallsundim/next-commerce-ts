@@ -14,10 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getOrdersByStatus = exports.getOrdersByUser = exports.getOrder = exports.getOrders = exports.cancelOrder = exports.changeOrderStatus = exports.createOrder = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
-const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
 const Order_model_1 = __importDefault(require("../models/Order.model"));
 const Product_model_1 = __importDefault(require("../models/Product.model"));
 const User_model_1 = __importDefault(require("../models/User.model"));
+const types_1 = require("../types");
+const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
 exports.createOrder = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     const { products, address, phone } = req.body;
@@ -52,6 +53,12 @@ exports.createOrder = (0, express_async_handler_1.default)((req, res, next) => _
         totalPrice,
         user: (_b = req === null || req === void 0 ? void 0 : req.user) === null || _b === void 0 ? void 0 : _b._id,
     });
+    if (!order) {
+        throw new errorHandler_1.default(400, "Order not created");
+    }
+    if (!user.orders) {
+        user.orders = [];
+    }
     user.orders.push(order._id);
     yield user.save();
     res.status(201).json({
@@ -82,7 +89,7 @@ exports.cancelOrder = (0, express_async_handler_1.default)((req, res, next) => _
     if (!order) {
         throw new errorHandler_1.default(404, "Order not found");
     }
-    if (order.orderStatus === "Cancelled") {
+    if (order.orderStatus === types_1.OrderStatus.Cancelled) {
         throw new errorHandler_1.default(400, "Order already cancelled");
     }
     order.products.forEach((product) => __awaiter(void 0, void 0, void 0, function* () {
@@ -93,7 +100,7 @@ exports.cancelOrder = (0, express_async_handler_1.default)((req, res, next) => _
             yield foundProduct.save();
         }
     }));
-    order.orderStatus = "Cancelled";
+    order.orderStatus = types_1.OrderStatus.Cancelled;
     yield order.save();
     res.status(200).json({
         success: true,

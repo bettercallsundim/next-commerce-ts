@@ -26,7 +26,6 @@ export default function Home() {
   const OPTIONS = {};
   const SLIDE_COUNT = 4;
   const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
-  console.log("rendering home");
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -37,12 +36,8 @@ export default function Home() {
 
   return (
     <>
-      {/* <div className="bg-black text-white mt-4 px-8 py-8 text-[30px] uppercase text-center">
-        Eid Offer ! Every Item Will Get 10% Discount ! Claim Now !
-      </div> */}
-      <div>
-        <SignIn />
-      </div>
+
+
       <div className="flex items-center gap-4 pt-6 pb-20 px-8 bg-sky-100 rounded-lg">
         <div className="category w-[50%] shadow-md py-4 px-6 rounded-lg bg-slate-200/45">
           <div className="category__title">

@@ -12,6 +12,8 @@ function cloudinaryUpload(file: string, folder: string) {
     folder: folder,
   });
 }
+
+
 async function deleteCloudinaryUpload(public_id: string) {
   return cloudinary.uploader.destroy(public_id);
 }

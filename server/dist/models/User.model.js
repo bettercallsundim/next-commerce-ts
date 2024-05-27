@@ -82,7 +82,7 @@ const userSchema = new mongoose_1.Schema({
     ],
 });
 userSchema.methods.JWT = function () {
-    return jsonwebtoken_1.default.sign({ id: this._id, role: this.role }, process.env.JWT_SECRET, {
+    return jsonwebtoken_1.default.sign({ _id: this._id, role: this.role }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRE,
     });
 };

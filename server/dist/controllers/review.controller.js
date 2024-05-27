@@ -14,10 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteReview = exports.editReview = exports.createReview = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
-const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
 const Product_model_1 = __importDefault(require("../models/Product.model"));
 const Review_model_1 = __importDefault(require("../models/Review.model"));
 const User_model_1 = __importDefault(require("../models/User.model"));
+const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
 exports.createReview = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const { product, rating, comment } = req.body;
@@ -43,6 +43,8 @@ exports.createReview = (0, express_async_handler_1.default)((req, res, next) => 
         comment,
     });
     product.reviews.push(review._id);
+    if (!user.reviews)
+        user.reviews = [];
     user.reviews.push(review._id);
     Promise.all([product.save(), user.save()]);
     res.status(201).json({

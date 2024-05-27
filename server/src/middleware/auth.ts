@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import asyncHandler from "express-async-handler";
 import type { JwtPayload } from "jsonwebtoken";
 import jwt from "jsonwebtoken";
@@ -18,6 +18,7 @@ export const authCheck = asyncHandler(
       token,
       process.env.JWT_SECRET as string
     ) as JwtPayload;
+
     const user = (await userModel.findById(decoded._id)) as IUser;
     if (!user) {
       throw new OhError(400, "User not found");

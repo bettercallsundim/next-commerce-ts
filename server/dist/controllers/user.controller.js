@@ -12,50 +12,37 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllUser = exports.getUser = exports.signOut = exports.signIn = exports.signUp = void 0;
+exports.getAllUser = exports.manageCart = exports.getUser = exports.signOut = exports.signIn = void 0;
+const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const User_model_1 = __importDefault(require("../models/User.model"));
 const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
-const express_async_handler_1 = __importDefault(require("express-async-handler"));
-exports.signUp = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, email, avatar } = req.body;
-    if (!name || !email) {
+exports.signIn = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name, email, picture: avatar } = req.body;
+    if (!name || !email || !avatar) {
         throw new errorHandler_1.default(400, "All fields are required");
     }
-    const exists = yield User_model_1.default.findOne({ email });
-    if (exists) {
-        throw new errorHandler_1.default(400, "User already exists");
-    }
-    else {
-        const user = yield User_model_1.default.create({
+    let user = yield User_model_1.default.findOne({ email });
+    if (!user) {
+        user = yield User_model_1.default.create({
             name,
             email,
             avatar,
-        });
-        res.status(201).json({
-            success: true,
-            message: "User created successfully",
-            data: user,
+            role: "user",
         });
     }
-}));
-exports.signIn = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { email } = req.body;
-    if (!email) {
-        throw new errorHandler_1.default(400, "Email is required");
-    }
-    const user = (yield User_model_1.default.findOne({ email }));
     if (!user) {
-        throw new errorHandler_1.default(400, "User not found");
+        throw new errorHandler_1.default(400, "User not created");
     }
     const token = user.JWT();
     res
-        .status(200)
         .cookie("token", token, {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 7,
+        secure: true,
     })
         .json({
         success: true,
+        user,
         message: "Signed In Successfully !",
     });
 }));
@@ -83,6 +70,21 @@ exports.getUser = (0, express_async_handler_1.default)((req, res, next) => __awa
     res.status(200).json({
         success: true,
         message: "User found",
+        data: user,
+    });
+}));
+exports.manageCart = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    const cart = req.body.cart;
+    const user = yield User_model_1.default.findById((_a = req === null || req === void 0 ? void 0 : req.user) === null || _a === void 0 ? void 0 : _a._id);
+    if (!user) {
+        throw new errorHandler_1.default(404, "User not found");
+    }
+    user.cart = cart;
+    yield user.save();
+    res.status(200).json({
+        success: true,
+        message: "Cart updated successfully",
         data: user,
     });
 }));

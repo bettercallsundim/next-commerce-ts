@@ -4,7 +4,6 @@ import Drawer from "@mui/material/Drawer";
 
 export default function Cart({ open, toggleDrawer }) {
   const store = useStore((state) => state);
-  console.log("🚀 ~ Card2 ~ store:", store);
   return (
     <Drawer anchor="right" open={open} onClose={toggleDrawer("right", false)}>
       <div className="w-[300px]">
