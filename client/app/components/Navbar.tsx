@@ -21,6 +21,7 @@ import * as React from "react";
 import { IoCartSharp } from "react-icons/io5";
 import Cart from "./Cart";
 import SignIn from "./SignIn";
+import { googleLogout } from '@react-oauth/google';
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -80,6 +81,7 @@ export default function Navbar() {
   };
   const handleLogOut = () => {
     signOut();
+    googleLogout()
     setUser(null);
     setAnchorEl(null);
     if (data) {

@@ -1,26 +1,43 @@
 import { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler";
+import mongoose from "mongoose";
 import categoryModel from "../models/Category.model";
 import productModel from "../models/Product.model";
 import { deleteCloudinaryUpload } from "../utils/cloudinary";
 import OhError from "../utils/errorHandler";
-
 export const createProduct = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { name, description, price, category, images, colors, sizes, stock } =
-      req.body;
+    console.log("huh ");
+    const {
+      name,
+      description,
+      price,
+      category,
+      pictures: images,
+      colors,
+      sizes,
+      stock,
+    } = req.body;
     if (
       !name ||
       !description ||
       !price ||
       !category ||
       images.length < 1 ||
-      !colors ||
-      !sizes ||
       !(stock >= 0)
     ) {
       throw new OhError(400, "All fields are required");
     }
+    console.log("req.body", {
+      name,
+      description,
+      price,
+      category,
+      images,
+      colors,
+      sizes,
+      stock,
+    });
     const product = await productModel.create({
       name,
       description,
@@ -34,6 +51,7 @@ export const createProduct = asyncHandler(
     await categoryModel.findByIdAndUpdate(category, {
       $push: { products: product._id },
     });
+
     res.status(201).json({
       success: true,
       message: "Product created successfully",
@@ -129,21 +147,83 @@ export const getProducts = asyncHandler(
 
 export const getProduct = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const product = await productModel.findById(req.params.id);
+    const product = await productModel.findById(req.params.id).lean();
     if (!product) {
       throw new OhError(404, "Product not found");
     }
+    let category = await categoryModel.findById(product.category).lean();
+    let breadcrumbs = [];
+    if (category) {
+      breadcrumbs.push(category);
+      if (category.parent) {
+        await fetchParents(category.parent);
+      }
+    }
+
+    async function fetchParents(
+      parentId: mongoose.Schema.Types.ObjectId | string
+    ) {
+      let parent = await categoryModel.findById(parentId).lean();
+      if (parent) {
+        breadcrumbs.push(parent);
+        if (parent.parent) {
+          await fetchParents(parent.parent);
+        } else {
+          return;
+        }
+      }
+    }
+    breadcrumbs.reverse();
     res.status(200).json({
       success: true,
       message: "Product fetched successfully",
-      data: product,
+      data: {
+        ...product,
+        categories: breadcrumbs,
+      },
     });
   }
 );
 
 export const getProductsByCategory = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const products = await productModel.find({ category: req.params.category });
+    let childCategories = [];
+    const aggregateCategories = async () => {
+      try {
+        const rootCategories = await categoryModel
+          .findById(req.params.category)
+          .lean();
+        childCategories.push(rootCategories);
+        if (rootCategories.childrens.length > 0) {
+          await fetchChildren(rootCategories);
+        }
+        return childCategories;
+      } catch (error) {
+        console.error("Error aggregating categories:", error);
+        throw error;
+      }
+    };
+    const fetchChildren = async (category) => {
+      for (let i = 0; i < category.childrens.length; i++) {
+        const childId = category.childrens[i];
+        const childCategory = await categoryModel.findById(childId).lean();
+        childCategories.push(childCategory);
+        if (childCategory) {
+          childCategory.childrens = await fetchChildren(childCategory);
+        }
+      }
+      return category.childrens;
+    };
+    await aggregateCategories();
+    const products = await productModel
+      .find({
+        category: {
+          $in: childCategories.map(
+            (cat) => new mongoose.Types.ObjectId(cat._id)
+          ),
+        },
+      })
+      .populate("category");
     if (!products) {
       throw new OhError(404, "Products not found");
     }

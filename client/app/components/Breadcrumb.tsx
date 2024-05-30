@@ -1,10 +1,10 @@
 "use client";
-import * as React from "react";
-import { emphasize, styled } from "@mui/material/styles";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import HomeIcon from "@mui/icons-material/Home";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Chip from "@mui/material/Chip";
-import HomeIcon from "@mui/icons-material/Home";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { emphasize, styled } from "@mui/material/styles";
+import * as React from "react";
 
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   const backgroundColor =
@@ -31,18 +31,18 @@ function handleClick(event: React.MouseEvent<Element, MouseEvent>) {
   console.info("You clicked a breadcrumb.");
 }
 
-export default function Breadcrumb() {
+export default function Breadcrumb({ categories }) {
   return (
     <div className="py-4 mb-4" role="presentation" onClick={handleClick}>
       <Breadcrumbs aria-label="breadcrumb">
-        <StyledBreadcrumb
-          component="a"
-          href="#"
-          label="Home"
-          icon={<HomeIcon fontSize="small" />}
-        />
-        <StyledBreadcrumb component="button" label="Catalog" />
-        <StyledBreadcrumb label="Accessories" />
+        {categories?.map((cat) => (
+          <StyledBreadcrumb
+            key={cat._id}
+            component="button"
+            label={cat.name}
+            icon={<HomeIcon fontSize="small" />}
+          />
+        ))}
       </Breadcrumbs>
     </div>
   );

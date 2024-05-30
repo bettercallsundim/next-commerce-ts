@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCategory = exports.getBreadcrumbs = exports.getAllCategoriesTree = exports.getAllCategories = exports.createCategory = exports.createCategoryWithMulter = void 0;
+exports.deleteCategory = exports.getChildrens = exports.getBreadcrumbs = exports.getAllCategoriesTree = exports.getAllCategories = exports.createCategory = exports.createCategoryWithMulter = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const Category_model_1 = __importDefault(require("../models/Category.model"));
 const cloudinary_1 = require("../utils/cloudinary");
@@ -138,11 +138,8 @@ exports.getAllCategoriesTree = (0, express_async_handler_1.default)((req, res, n
         return category.childrens;
     });
     let cats = yield aggregateCategories();
-    // aggregateCategories().then((result) => {
-    //   console.log(result, "result");
-    //   cats=result
-    // });
-    return res.json({
+    res.json({
+        success: true,
         categories: cats,
     });
 }));
@@ -172,10 +169,46 @@ exports.getBreadcrumbs = (0, express_async_handler_1.default)((req, res, next) =
         });
     }
     breadcrumbs.reverse();
-    return res.status(200).json({
+    res.status(200).json({
         success: true,
         message: "Breadcrumbs fetched successfully",
         breadcrumbs,
+    });
+}));
+// get breadcrumbs/childs of a category
+exports.getChildrens = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { categoryId } = req.params;
+    let childCategories = [];
+    const aggregateCategories = () => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const rootCategories = yield Category_model_1.default.findById(categoryId).lean();
+            childCategories.push(rootCategories);
+            if (rootCategories.childrens.length > 0) {
+                yield fetchChildren(rootCategories);
+            }
+            return childCategories;
+        }
+        catch (error) {
+            console.error("Error aggregating categories:", error);
+            throw error;
+        }
+    });
+    const fetchChildren = (category) => __awaiter(void 0, void 0, void 0, function* () {
+        for (let i = 0; i < category.childrens.length; i++) {
+            const childId = category.childrens[i];
+            const childCategory = yield Category_model_1.default.findById(childId).lean();
+            childCategories.push(childCategory);
+            if (childCategory) {
+                childCategory.childrens = yield fetchChildren(childCategory);
+            }
+        }
+        return category.childrens;
+    });
+    yield aggregateCategories();
+    res.status(200).json({
+        success: true,
+        message: "Breadcrumbs childs fetched successfully",
+        breadcrumbs: childCategories,
     });
 }));
 exports.deleteCategory = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {

@@ -14,22 +14,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getProductsByCategory = exports.getProduct = exports.getProducts = exports.deleteProduct = exports.editProduct = exports.createProduct = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
+const mongoose_1 = __importDefault(require("mongoose"));
 const Category_model_1 = __importDefault(require("../models/Category.model"));
 const Product_model_1 = __importDefault(require("../models/Product.model"));
 const cloudinary_1 = require("../utils/cloudinary");
 const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
 exports.createProduct = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, description, price, category, images, colors, sizes, stock } = req.body;
+    console.log("huh ");
+    const { name, description, price, category, pictures: images, colors, sizes, stock, } = req.body;
     if (!name ||
         !description ||
         !price ||
         !category ||
         images.length < 1 ||
-        !colors ||
-        !sizes ||
         !(stock >= 0)) {
         throw new errorHandler_1.default(400, "All fields are required");
     }
+    console.log("req.body", {
+        name,
+        description,
+        price,
+        category,
+        images,
+        colors,
+        sizes,
+        stock,
+    });
     const product = yield Product_model_1.default.create({
         name,
         description,
@@ -110,18 +120,76 @@ exports.getProducts = (0, express_async_handler_1.default)((req, res, next) => _
     });
 }));
 exports.getProduct = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const product = yield Product_model_1.default.findById(req.params.id);
+    const product = yield Product_model_1.default.findById(req.params.id).lean();
     if (!product) {
         throw new errorHandler_1.default(404, "Product not found");
     }
+    let category = yield Category_model_1.default.findById(product.category).lean();
+    let breadcrumbs = [];
+    if (category) {
+        breadcrumbs.push(category);
+        if (category.parent) {
+            yield fetchParents(category.parent);
+        }
+    }
+    function fetchParents(parentId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let parent = yield Category_model_1.default.findById(parentId).lean();
+            if (parent) {
+                breadcrumbs.push(parent);
+                if (parent.parent) {
+                    yield fetchParents(parent.parent);
+                }
+                else {
+                    return;
+                }
+            }
+        });
+    }
+    breadcrumbs.reverse();
     res.status(200).json({
         success: true,
         message: "Product fetched successfully",
-        data: product,
+        data: Object.assign(Object.assign({}, product), { categories: breadcrumbs }),
     });
 }));
 exports.getProductsByCategory = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const products = yield Product_model_1.default.find({ category: req.params.category });
+    let childCategories = [];
+    const aggregateCategories = () => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const rootCategories = yield Category_model_1.default
+                .findById(req.params.category)
+                .lean();
+            childCategories.push(rootCategories);
+            if (rootCategories.childrens.length > 0) {
+                yield fetchChildren(rootCategories);
+            }
+            return childCategories;
+        }
+        catch (error) {
+            console.error("Error aggregating categories:", error);
+            throw error;
+        }
+    });
+    const fetchChildren = (category) => __awaiter(void 0, void 0, void 0, function* () {
+        for (let i = 0; i < category.childrens.length; i++) {
+            const childId = category.childrens[i];
+            const childCategory = yield Category_model_1.default.findById(childId).lean();
+            childCategories.push(childCategory);
+            if (childCategory) {
+                childCategory.childrens = yield fetchChildren(childCategory);
+            }
+        }
+        return category.childrens;
+    });
+    yield aggregateCategories();
+    const products = yield Product_model_1.default
+        .find({
+        category: {
+            $in: childCategories.map((cat) => new mongoose_1.default.Types.ObjectId(cat._id)),
+        },
+    })
+        .populate("category");
     if (!products) {
         throw new errorHandler_1.default(404, "Products not found");
     }

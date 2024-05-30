@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllUser = exports.manageCart = exports.getUser = exports.signOut = exports.signIn = void 0;
+exports.getAllUser = exports.manageCart = exports.getUser = exports.authPersist = exports.signOut = exports.signIn = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const User_model_1 = __importDefault(require("../models/User.model"));
 const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
@@ -58,6 +58,16 @@ exports.signOut = (0, express_async_handler_1.default)((req, res, next) => __awa
         message: "Signed Out Successfully !",
     });
 }));
+exports.authPersist = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    if ((_a = req === null || req === void 0 ? void 0 : req.user) === null || _a === void 0 ? void 0 : _a._id) {
+        res.status(200).json({
+            success: true,
+            user: req.user,
+            message: "User fetched Successfully !",
+        });
+    }
+}));
 exports.getUser = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     if (!id) {
@@ -74,9 +84,9 @@ exports.getUser = (0, express_async_handler_1.default)((req, res, next) => __awa
     });
 }));
 exports.manageCart = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    var _b;
     const cart = req.body.cart;
-    const user = yield User_model_1.default.findById((_a = req === null || req === void 0 ? void 0 : req.user) === null || _a === void 0 ? void 0 : _a._id);
+    const user = yield User_model_1.default.findById((_b = req === null || req === void 0 ? void 0 : req.user) === null || _b === void 0 ? void 0 : _b._id);
     if (!user) {
         throw new errorHandler_1.default(404, "User not found");
     }

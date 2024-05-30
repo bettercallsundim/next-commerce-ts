@@ -3,3 +3,8 @@ export interface SignUp {
   name: string,
   picture: string
 }
+
+export type ToasterProps = {
+  message: string,
+  type : "success" | "error" | "info" | "warning"
+}

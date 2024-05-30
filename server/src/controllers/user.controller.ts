@@ -17,7 +17,7 @@ export const signIn = asyncHandler(
         email,
         avatar,
         role: "user",
-      })
+      });
     }
     if (!user) {
       throw new OhError(400, "User not created");
@@ -51,6 +51,17 @@ export const signOut = asyncHandler(
       });
   }
 );
+export const authPersist = asyncHandler(
+  async (req: IRequest, res: Response, next: NextFunction) => {
+    if (req?.user?._id) {
+      res.status(200).json({
+        success: true,
+        user: req.user,
+        message: "User fetched Successfully !",
+      });
+    }
+  }
+);
 
 export const getUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -69,6 +80,8 @@ export const getUser = asyncHandler(
     });
   }
 );
+
+
 
 export const manageCart = asyncHandler(
   async (req: IRequest, res: Response, next: NextFunction) => {

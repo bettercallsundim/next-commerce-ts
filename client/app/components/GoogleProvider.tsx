@@ -1,11 +1,8 @@
 "use client";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
+import UserContext from "./UserContext";
 
 const queryClient = new QueryClient();
 
@@ -17,7 +14,7 @@ const GoogleProvider = ({ children }: Props) => {
   return (
     <QueryClientProvider client={queryClient}>
       <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
-        {children}
+        <UserContext>{children}</UserContext>
       </GoogleOAuthProvider>
     </QueryClientProvider>
   );
