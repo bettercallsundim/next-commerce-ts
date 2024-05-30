@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  authPersist,
   getAllUser,
   getUser,
   manageCart,
@@ -12,6 +13,7 @@ const router = express.Router();
 // auth routes
 router.post("/sign-in", signIn);
 router.get("/sign-out", authCheck, signOut);
+router.get("/authPersist", authCheck, authPersist);
 
 // user routes
 router.get("/:id", authCheck, getUser);

@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler";
+import mongoose from "mongoose";
 import categoryModel from "../models/Category.model";
 import { cloudinaryUpload, deleteCloudinaryUpload } from "../utils/cloudinary";
 import OhError from "../utils/errorHandler";
-import mongoose from "mongoose";
 
 export const createCategoryWithMulter = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -140,15 +140,14 @@ export const getAllCategoriesTree = asyncHandler(
       return category.childrens;
     };
     let cats = await aggregateCategories();
-    // aggregateCategories().then((result) => {
-    //   console.log(result, "result");
-    //   cats=result
-    // });
-    return res.json({
+
+    res.json({
+      success: true,
       categories: cats,
     });
   }
 );
+
 // get breadcrumbs/parents of a category
 export const getBreadcrumbs = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -176,10 +175,50 @@ export const getBreadcrumbs = asyncHandler(
       }
     }
     breadcrumbs.reverse();
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: "Breadcrumbs fetched successfully",
       breadcrumbs,
+    });
+  }
+);
+
+// get breadcrumbs/childs of a category
+export const getChildrens = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { categoryId } = req.params;
+    let childCategories = [];
+    const aggregateCategories = async () => {
+      try {
+        const rootCategories = await categoryModel.findById(categoryId).lean();
+        childCategories.push(rootCategories);
+        if (rootCategories.childrens.length > 0) {
+          await fetchChildren(rootCategories);
+        }
+        return childCategories;
+      } catch (error) {
+        console.error("Error aggregating categories:", error);
+        throw error;
+      }
+    };
+    const fetchChildren = async (category) => {
+      for (let i = 0; i < category.childrens.length; i++) {
+        const childId = category.childrens[i];
+        const childCategory = await categoryModel.findById(childId).lean();
+        childCategories.push(childCategory);
+        if (childCategory) {
+          childCategory.childrens = await fetchChildren(childCategory);
+        }
+      }
+      return category.childrens;
+    };
+    await aggregateCategories();
+
+
+    res.status(200).json({
+      success: true,
+      message: "Breadcrumbs childs fetched successfully",
+      breadcrumbs: childCategories,
     });
   }
 );
