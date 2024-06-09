@@ -4,6 +4,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Chip from "@mui/material/Chip";
 import { emphasize, styled } from "@mui/material/styles";
+import Link from "next/link";
 import * as React from "react";
 
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
@@ -36,12 +37,13 @@ export default function Breadcrumb({ categories }) {
     <div className="py-4 mb-4" role="presentation" onClick={handleClick}>
       <Breadcrumbs aria-label="breadcrumb">
         {categories?.map((cat) => (
-          <StyledBreadcrumb
-            key={cat._id}
-            component="button"
-            label={cat.name}
-            icon={<HomeIcon fontSize="small" />}
-          />
+          <Link key={cat._id} href={`/category/${cat._id}`}>
+            <StyledBreadcrumb
+              component="button"
+              label={cat.name}
+              icon={<HomeIcon fontSize="small" />}
+            />
+          </Link>
         ))}
       </Breadcrumbs>
     </div>
