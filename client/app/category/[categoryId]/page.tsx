@@ -1,3 +1,6 @@
+import Breadcrumb from "@/app/components/Breadcrumb";
+import Card2 from "@/app/components/Card2";
+import Container from "@/app/components/Container";
 import type { Metadata } from "next";
 // export async function generateMetadata({ params }): Promise<Metadata> {
 //   const { data } = await getCategoryData(params.productId);
@@ -15,7 +18,6 @@ async function getCategoryData(id) {
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");
-
   }
   return res.json();
 }
@@ -36,5 +38,15 @@ export default async function page({ params }) {
     productsByCategoryFn,
   ]);
   console.log([JSON.stringify(categoryData, null, 2), productsByCategory]);
-  return <>Hello Worlds</>;
+  return (
+    <Container>
+      <Breadcrumb categories={categoryData.breadcrumbs} />
+      <h1>Just For You</h1>
+      <div className="bg-secondary px-8 py-12 grid  grid-cols-2 md:grid-cols-5 gap-4">
+        {productsByCategory?.data?.map((product, ind) => (
+          <Card2 key={ind} product={product} />
+        ))}
+      </div>
+    </Container>
+  );
 }
