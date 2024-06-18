@@ -1,6 +1,6 @@
 "use client";
 import { axios, useSignOut } from "@/hooks/queries";
-import useStore from "@/zustand";
+import useZustand from "@/hooks/useZustand";
 import { googleLogout } from "@react-oauth/google";
 import React, { useEffect } from "react";
 
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const UserContext = ({ children }: Props) => {
-  const { setUser } = useStore();
+  const { setUser } = useZustand();
   const { signOut, data, error } = useSignOut();
   async function authPersist() {
     try {

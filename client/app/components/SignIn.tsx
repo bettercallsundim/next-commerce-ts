@@ -1,5 +1,5 @@
 import { useSignIn } from "@/hooks/queries";
-import useStore from "@/zustand";
+import useZustand from "@/hooks/useZustand";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import React from "react";
@@ -8,7 +8,7 @@ type Props = {};
 
 const SignIn = (props: Props) => {
   const { mutate, data, error } = useSignIn();
-  const { user } = useStore();
+  const { user } = useZustand();
 
   if (user) {
     console.log(user, "from sign up");

@@ -1,13 +1,13 @@
-"use client"
+"use client";
+import useZustand from "@/hooks/useZustand";
 import { SignUp } from "@/types";
-import useStore from "@/zustand";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND;
 
 export const useSignIn = () => {
-  const { setUser } = useStore();
+  const { setUser } = useZustand();
   const { mutate, isPending, data, error, isError, isSuccess } = useMutation({
     mutationFn: async (input: SignUp) => {
       const res = await axios.post("/user/sign-in", input, {
@@ -62,7 +62,7 @@ export const useCreateProduct = () => {
     error,
     isSuccess,
   } = useMutation({
-    mutationFn:  async (productData: {
+    mutationFn: async (productData: {
       name: string;
       description: string;
       price: number;
@@ -72,15 +72,14 @@ export const useCreateProduct = () => {
       sizes: string[];
       pictures: any[];
     }) => {
-      let res= await axios.post("/product/create", productData, {
+      let res = await axios.post("/product/create", productData, {
         withCredentials: true,
       });
-      console.log(res,"resss")
-      return res
-
+      console.log(res, "resss");
+      return res;
     },
     onSuccess: (data) => {
-      console.log(data,"createProduct data")
+      console.log(data, "createProduct data");
     },
   });
   return { createProduct, isPending, error };

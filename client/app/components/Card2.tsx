@@ -1,14 +1,13 @@
 "use client";
-import useStore from "@/zustand";
+import useZustand from "@/hooks/useZustand";
 import { Rating } from "@mui/material";
 import { useRouter } from "next/navigation";
 import DottedButton from "./DottedButton";
-
 const Card2 = ({ product }: { product: any }) => {
   const router = useRouter();
   const { name, description, price, category, images, colors, sizes, stock } =
     product;
-  const store = useStore((state) => state);
+  const { addToCart } = useZustand();
   return (
     <div
       onClick={() => {
@@ -38,7 +37,13 @@ const Card2 = ({ product }: { product: any }) => {
         </p>
         {/* @ts-ignore */}
 
-        <p className="my-0 mt-1" onClick={() => store.addToCart(product)}>
+        <p
+          className="my-0 mt-1"
+          onClick={(e) => {
+            e.stopPropagation();
+            addToCart(product);
+          }}
+        >
           <DottedButton text="Add To Cart" size="small" />
         </p>
       </div>

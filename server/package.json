@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "devs": "nodemon --exec ts-node src/server.ts",
-    "dev": "concurrently \"tsc --watch\" \"nodemon dist/server.js\"",
+    "dev": "concurrently \"tsc --watch\" \"bun --smol --watch dist/server.js\"",
     "start": "node dist/server.js",
     "build": "tsc"
   },
