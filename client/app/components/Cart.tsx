@@ -1,24 +1,24 @@
 "use client";
-import useStore from "@/zustand";
+import useZustand from "@/hooks/useZustand";
 import Drawer from "@mui/material/Drawer";
 
 export default function Cart({ open, toggleDrawer }) {
-  const store = useStore((state) => state);
+  const store = useZustand();
   return (
     <Drawer anchor="right" open={open} onClose={toggleDrawer("right", false)}>
       <div className="w-[300px]">
         {/* @ts-ignore */}
         {store.cartItems.map((item) => (
-          <div key={item.id} className="flex justify-between items-center">
+          <div key={item._id} className="flex justify-between items-center">
             <div>
               <img
                 className="w-[50px] h-[50px] object-cover"
-                src={item.thumbnail}
+                src={item.images[0]}
                 alt=""
               />
             </div>
             <div>
-              <p>{item.title}</p>
+              <p>{item.name}</p>
               <p>${item.price}</p>
             </div>
             <div>

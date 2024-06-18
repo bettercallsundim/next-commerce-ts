@@ -1,6 +1,6 @@
 "use client";
 import { useSignOut } from "@/hooks/queries";
-import useStore from "@/zustand";
+import useZustand from "@/hooks/useZustand";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -17,11 +17,11 @@ import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { alpha, styled } from "@mui/material/styles";
+import { googleLogout } from "@react-oauth/google";
 import * as React from "react";
 import { IoCartSharp } from "react-icons/io5";
 import Cart from "./Cart";
 import SignIn from "./SignIn";
-import { googleLogout } from '@react-oauth/google';
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -64,7 +64,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Navbar() {
-  const { user, setUser } = useStore();
+  const { user, setUser } = useZustand();
   const { signOut, data, error } = useSignOut();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -81,7 +81,7 @@ export default function Navbar() {
   };
   const handleLogOut = () => {
     signOut();
-    googleLogout()
+    googleLogout();
     setUser(null);
     setAnchorEl(null);
     if (data) {

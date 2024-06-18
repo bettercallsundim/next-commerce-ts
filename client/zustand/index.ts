@@ -9,7 +9,7 @@ interface ZustandStates {
   decreaseFromCart: (item: any) => void;
 }
 
-const useStore = create<ZustandStates>((set) => ({
+const zustandStore = create<ZustandStates>((set) => ({
   cartItemsNumber: 0,
   cartItems: [],
   user: null,
@@ -17,7 +17,7 @@ const useStore = create<ZustandStates>((set) => ({
   addToCart: (item: any) =>
     set((state: any) => {
       let items = state.cartItems;
-      let itemFound = items.findIndex((i: any) => i.id === item.id);
+      let itemFound = items.findIndex((i: any) => i._id === item._id);
       if (itemFound !== -1) {
         items[itemFound].quantity += 1;
         return { cartItems: items, cartItemsNumber: state.cartItemsNumber + 1 };
@@ -31,8 +31,7 @@ const useStore = create<ZustandStates>((set) => ({
   decreaseFromCart: (item: any) =>
     set((state: any) => {
       let items = state.cartItems;
-      let itemFound = items.findIndex((i: any) => i.id === item.id);
-      console.log(item, itemFound, items);
+      let itemFound = items.findIndex((i: any) => i._id === item._id);
       if (itemFound !== -1) {
         if (items[itemFound].quantity > 1) {
           items[itemFound].quantity -= 1;
@@ -42,7 +41,7 @@ const useStore = create<ZustandStates>((set) => ({
           };
         } else {
           return {
-            cartItems: items.filter((i: any) => i.id !== item.id),
+            cartItems: items.filter((i: any) => i._id !== item._id),
             cartItemsNumber: state.cartItemsNumber - 1,
           };
         }
@@ -51,4 +50,4 @@ const useStore = create<ZustandStates>((set) => ({
       }
     }),
 }));
-export default useStore;
+export default zustandStore;

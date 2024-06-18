@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import { insertProducts } from "./utils/dummy";
 dotenv.config();
 
+
+
 export const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO as string);
