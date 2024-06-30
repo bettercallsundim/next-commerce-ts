@@ -12,7 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.insertProducts = exports.products = void 0;
+exports.products = void 0;
+exports.insertProducts = insertProducts;
 const faker_1 = require("@faker-js/faker");
 const mongoose_1 = __importDefault(require("mongoose"));
 const Product_model_1 = __importDefault(require("../models/Product.model"));
@@ -75,4 +76,3 @@ function insertProducts() {
         yield Product_model_1.default.insertMany(exports.products);
     });
 }
-exports.insertProducts = insertProducts;

@@ -1,5 +1,5 @@
 "use client";
-import { axios, useSignOut } from "@/hooks/queries";
+import { myAxios, useSignOut } from "@/hooks/queries";
 import useZustand from "@/hooks/useZustand";
 import { googleLogout } from "@react-oauth/google";
 import React, { useEffect } from "react";
@@ -9,15 +9,17 @@ type Props = {
 };
 
 const UserContext = ({ children }: Props) => {
-  const { setUser } = useZustand();
+  const { setUser, setCart } = useZustand();
   const { signOut, data, error } = useSignOut();
   async function authPersist() {
     try {
-      const res = await axios.get("/user/authPersist", {
+      const res = await myAxios.get("/user/authPersist", {
         withCredentials: true,
       });
       if (res.data.success) {
         setUser(res.data.user);
+        console.log(res.data.user.cart, "cart");
+        setCart(res.data.user.cart);
       } else {
         throw new Error("User not found");
       }

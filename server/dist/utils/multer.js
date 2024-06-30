@@ -26,6 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = default_1;
 const fs_1 = __importDefault(require("fs"));
 const multer_1 = __importStar(require("multer"));
 function default_1(folderName) {
@@ -48,4 +49,3 @@ function default_1(folderName) {
         },
     });
 }
-exports.default = default_1;

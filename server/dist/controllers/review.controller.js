@@ -54,7 +54,7 @@ exports.createReview = (0, express_async_handler_1.default)((req, res, next) => 
     });
 }));
 exports.editReview = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var _b;
+    var _a;
     const { rating, comment } = req.body;
     if (!rating || !comment) {
         throw new errorHandler_1.default(400, "All fields are required");
@@ -63,7 +63,7 @@ exports.editReview = (0, express_async_handler_1.default)((req, res, next) => __
     if (!review) {
         throw new errorHandler_1.default(404, "Review not found");
     }
-    if (review.user.toString() !== ((_b = req.user) === null || _b === void 0 ? void 0 : _b._id)) {
+    if (review.user.toString() !== ((_a = req.user) === null || _a === void 0 ? void 0 : _a._id)) {
         throw new errorHandler_1.default(403, "You are not authorized to edit this review");
     }
     review = yield Review_model_1.default.findByIdAndUpdate(req.params.id, {
@@ -77,12 +77,12 @@ exports.editReview = (0, express_async_handler_1.default)((req, res, next) => __
     });
 }));
 exports.deleteReview = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var _c;
+    var _a;
     const review = yield Review_model_1.default.findById(req.params.id);
     if (!review) {
         throw new errorHandler_1.default(404, "Review not found");
     }
-    if (review.user.toString() !== ((_c = req.user) === null || _c === void 0 ? void 0 : _c._id)) {
+    if (review.user.toString() !== ((_a = req.user) === null || _a === void 0 ? void 0 : _a._id)) {
         throw new errorHandler_1.default(403, "You are not authorized to delete this review");
     }
     yield Review_model_1.default.findByIdAndDelete(req.params.id);

@@ -84,9 +84,9 @@ exports.getUser = (0, express_async_handler_1.default)((req, res, next) => __awa
     });
 }));
 exports.manageCart = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var _b;
+    var _a;
     const cart = req.body.cart;
-    const user = yield User_model_1.default.findById((_b = req === null || req === void 0 ? void 0 : req.user) === null || _b === void 0 ? void 0 : _b._id);
+    const user = yield User_model_1.default.findById((_a = req === null || req === void 0 ? void 0 : req.user) === null || _a === void 0 ? void 0 : _a._id);
     if (!user) {
         throw new errorHandler_1.default(404, "User not found");
     }

@@ -18,6 +18,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { alpha, styled } from "@mui/material/styles";
 import { googleLogout } from "@react-oauth/google";
+import Link from "next/link";
 import * as React from "react";
 import { IoCartSharp } from "react-icons/io5";
 import Cart from "./Cart";
@@ -191,13 +192,13 @@ export default function Navbar() {
   };
 
   return (
-    <Box className="" sx={{ flexGrow: 1 }}>
+    <Box className="bg-primary px-8" sx={{ flexGrow: 1 }}>
       <Cart open={state.right} toggleDrawer={toggleDrawer} />
-      <AppBar className="bg-primary px-8" position="static">
+      <AppBar className="bg-primary container mx-auto" position="static">
         <Toolbar>
-          <Typography variant="h6" noWrap component="div" sx={{}}>
+          <Link href="/" className="text-white text-xl">
             Exocommerce
-          </Typography>
+          </Link>
           <Search sx={{ display: { xs: "none", md: "flex" } }}>
             <SearchIconWrapper>
               <SearchIcon />

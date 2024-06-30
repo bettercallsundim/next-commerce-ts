@@ -14,7 +14,7 @@ import { Document, Schema } from "mongoose";
 
 export type CartItem = {
   proudctId: Schema.Types.ObjectId;
-  quantity: Number;
+  quantity: number;
 };
 
 export interface IUser extends Document {
@@ -61,8 +61,6 @@ export interface Order extends Document {
   deliveredAt: Date;
   paidAt: Date;
 }
-
-
 
 export interface Review extends Document {
   user: Schema.Types.ObjectId;

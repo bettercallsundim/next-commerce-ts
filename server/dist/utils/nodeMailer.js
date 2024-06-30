@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sendMail = void 0;
+exports.sendMail = sendMail;
 const nodemailer_1 = __importDefault(require("nodemailer"));
 const transporter = nodemailer_1.default.createTransport({
     host: "smtp.gmail.com",
@@ -23,8 +23,8 @@ const transporter = nodemailer_1.default.createTransport({
         pass: "abc",
     },
 });
-function sendMail({ from, to, subject, text, html, }) {
-    return __awaiter(this, void 0, void 0, function* () {
+function sendMail(_a) {
+    return __awaiter(this, arguments, void 0, function* ({ from, to, subject, text, html, }) {
         // send mail with defined transport object
         yield transporter
             .sendMail({
@@ -42,4 +42,3 @@ function sendMail({ from, to, subject, text, html, }) {
         });
     });
 }
-exports.sendMail = sendMail;
