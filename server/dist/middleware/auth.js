@@ -16,6 +16,7 @@ exports.roleCheck = exports.authCheck = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const Product_model_1 = __importDefault(require("../models/Product.model"));
 const User_model_1 = __importDefault(require("../models/User.model"));
 const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
 dotenv_1.default.config();
@@ -26,7 +27,19 @@ exports.authCheck = (0, express_async_handler_1.default)((req, res, next) => __a
     }
     let token = req.cookies.token;
     let decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
-    const user = (yield User_model_1.default.findById(decoded._id));
+    const user = (yield User_model_1.default.findById(decoded._id).lean());
+    console.log("🚀 ~ user: ", user);
+    let items = [];
+    for (const item of user === null || user === void 0 ? void 0 : user.cart) {
+        console.log("🚀 ~ item:", item);
+        let product = yield Product_model_1.default.findById(item._id).lean();
+        if (product) {
+            product.quantity = item.quantity;
+            items.push(product);
+        }
+    }
+    console.log("🚀 ~ items:", items);
+    user === null || user === void 0 ? void 0 : user.cart = items;
     if (!user) {
         throw new errorHandler_1.default(400, "User not found");
     }

@@ -85,4 +85,4 @@ export const useCreateProduct = () => {
   return { createProduct, isPending, error };
 };
 
-export { axios };
+export { axios as myAxios };

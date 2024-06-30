@@ -53,7 +53,7 @@ const sampleProduct = {
 };
 const Product = ({ product }) => {
   return (
-    <div className="px-8 py-8">
+    <div className="container mx-auto px-8 py-8">
       <Breadcrumb categories={product.categories} />
       <div className="productBox grid grid-cols-1 md:grid-cols-2">
         <div className="imageGallery sticky  rounded-md">

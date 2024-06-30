@@ -1,12 +1,27 @@
+import { myAxios } from "@/hooks/queries";
 import { create } from "zustand";
+import { CartItem } from "./../../server/src/types/index";
 
 interface ZustandStates {
   cartItemsNumber: number;
-  cartItems: any;
+  cartItems: CartItem[];
   user: any;
   setUser: (user: any) => void;
   addToCart: (item: any) => void;
   decreaseFromCart: (item: any) => void;
+}
+async function updateCart(cart: CartItem[]) {
+  await myAxios
+    .post(
+      "/user/manage-cart",
+      { cart },
+      {
+        withCredentials: true,
+      }
+    )
+    .then((res) => {
+      console.log(res, "manage cart");
+    });
 }
 
 const zustandStore = create<ZustandStates>((set) => ({
@@ -14,9 +29,11 @@ const zustandStore = create<ZustandStates>((set) => ({
   cartItems: [],
   user: null,
   setUser: (user: any) => set({ user }),
-  addToCart: (item: any) =>
+  setCart: (cartItems: CartItem[]) => set({ cartItems }),
+  addToCart: async (item: any) => {
+    let items: CartItem[] | [] = [];
     set((state: any) => {
-      let items = state.cartItems;
+      items = state.cartItems;
       let itemFound = items.findIndex((i: any) => i._id === item._id);
       if (itemFound !== -1) {
         items[itemFound].quantity += 1;
@@ -27,10 +44,13 @@ const zustandStore = create<ZustandStates>((set) => ({
           cartItemsNumber: state.cartItemsNumber + 1,
         };
       }
-    }),
-  decreaseFromCart: (item: any) =>
+    });
+    await updateCart(items);
+  },
+  decreaseFromCart: async (item: any) => {
+    let items: CartItem[] | [] = [];
     set((state: any) => {
-      let items = state.cartItems;
+      items = state.cartItems;
       let itemFound = items.findIndex((i: any) => i._id === item._id);
       if (itemFound !== -1) {
         if (items[itemFound].quantity > 1) {
@@ -48,6 +68,8 @@ const zustandStore = create<ZustandStates>((set) => ({
       } else {
         return state;
       }
-    }),
+    });
+    await updateCart(items);
+  },
 }));
 export default zustandStore;

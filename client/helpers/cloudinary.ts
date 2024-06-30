@@ -1,9 +1,7 @@
-import axios from "axios";
+import { myAxios } from "@/hooks/queries";
 
 export const signForm = async () => {
-  await axios
-    .get(`${process.env.NEXT_PUBLIC_BACKEND}/cloudinary-auth`)
-    .then((res) => {
-      return res.data;
-    });
+  await myAxios.get(`/cloudinary-auth`).then((res) => {
+    return res.data;
+  });
 };

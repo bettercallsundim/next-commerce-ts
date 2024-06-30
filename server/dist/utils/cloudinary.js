@@ -32,7 +32,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signuploadform = exports.deleteCloudinaryUpload = exports.cloudinaryUpload = exports.cloudName = exports.apiSecret = exports.apiKey = void 0;
+exports.signuploadform = exports.cloudName = exports.apiSecret = exports.apiKey = void 0;
+exports.cloudinaryUpload = cloudinaryUpload;
+exports.deleteCloudinaryUpload = deleteCloudinaryUpload;
 const cloudinary_1 = require("cloudinary");
 const dotenv = __importStar(require("dotenv"));
 dotenv.config();
@@ -47,13 +49,11 @@ function cloudinaryUpload(file, folder) {
         folder: folder,
     });
 }
-exports.cloudinaryUpload = cloudinaryUpload;
 function deleteCloudinaryUpload(public_id) {
     return __awaiter(this, void 0, void 0, function* () {
         return cloudinary_1.v2.uploader.destroy(public_id);
     });
 }
-exports.deleteCloudinaryUpload = deleteCloudinaryUpload;
 const apiKey = cloudinary_1.v2.config().api_key;
 exports.apiKey = apiKey;
 const apiSecret = cloudinary_1.v2.config().api_secret;

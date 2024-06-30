@@ -3,7 +3,7 @@ import Card2 from "@/app/components/Card2";
 import Carousel from "@/app/components/Carousel";
 import MultiSlider from "@/app/components/MultiSlider";
 import SignIn from "@/app/components/SignIn";
-import { axios } from "@/hooks/queries";
+import { myAxios } from "@/hooks/queries";
 import { Divider } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -16,8 +16,8 @@ export default function Home() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   useEffect(() => {
-    axios.get("/product/all").then((res) => setProducts(res.data.data));
-    axios
+    myAxios.get("/product/all").then((res) => setProducts(res.data.data));
+    myAxios
       .get("/category/all/tree")
       .then((res) => setCategories(res.data.categories));
   }, []);
