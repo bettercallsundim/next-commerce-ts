@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import productModel from "../models/Product.model";
 import userModel from "../models/User.model";
-import { IRequest, IUser } from "../types";
+import { CartItem, IProduct, IRequest, IUser } from "../types";
 import OhError from "../utils/errorHandler";
 dotenv.config();
 
@@ -21,21 +21,30 @@ export const authCheck = asyncHandler(
       process.env.JWT_SECRET as string
     ) as JwtPayload;
 
+    // fetching user from database
     const user = (await userModel.findById(decoded._id).lean()) as IUser;
-    console.log("🚀 ~ user: ", user);
+    console.log("🚀 ~ user:", user);
 
     let items = [];
-    for (const item of user?.cart) {
-      console.log("🚀 ~ item:", item);
-      let product = await productModel.findById(item._id).lean();
+
+    // populating items in user cart
+    user.cart = user.cart || [];
+    for (const item of user.cart) {
+      let product: IProduct | null = await productModel
+        .findById(item._id)
+        .lean();
       if (product) {
-        product.quantity = item.quantity;
-        items.push(product);
+        let productItem: CartItem = {
+          product: "",
+          quantity: 0,
+        };
+        productItem.product = product;
+        productItem.quantity = item.quantity || 0;
+        console.log("🚀 ~ productItem:", productItem);
+        items.push(productItem);
       }
     }
-    console.log("🚀 ~ items:", items);
-
-    user?.cart = items;
+    user.cart = items;
     if (!user) {
       throw new OhError(400, "User not found");
     }

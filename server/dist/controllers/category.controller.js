@@ -129,7 +129,9 @@ exports.getAllCategoriesTree = (0, express_async_handler_1.default)((req, res, n
     const fetchChildren = (category) => __awaiter(void 0, void 0, void 0, function* () {
         for (let i = 0; i < category.childrens.length; i++) {
             const childId = category.childrens[i];
-            const childCategory = yield Category_model_1.default.findById(childId).lean();
+            const childCategory = yield Category_model_1.default
+                .findById(childId)
+                .lean();
             if (childCategory) {
                 childCategory.childrens = yield fetchChildren(childCategory);
                 category.childrens[i] = childCategory;
@@ -146,7 +148,9 @@ exports.getAllCategoriesTree = (0, express_async_handler_1.default)((req, res, n
 // get breadcrumbs/parents of a category
 exports.getBreadcrumbs = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { categoryId } = req.params;
-    let category = yield Category_model_1.default.findById(categoryId).lean();
+    let category = yield Category_model_1.default
+        .findById(categoryId)
+        .lean();
     let breadcrumbs = [];
     if (category) {
         breadcrumbs.push(category);
@@ -156,7 +160,9 @@ exports.getBreadcrumbs = (0, express_async_handler_1.default)((req, res, next) =
     }
     function fetchParents(parentId) {
         return __awaiter(this, void 0, void 0, function* () {
-            let parent = yield Category_model_1.default.findById(parentId).lean();
+            let parent = yield Category_model_1.default
+                .findById(parentId)
+                .lean();
             if (parent) {
                 breadcrumbs.push(parent);
                 if (parent.parent) {
@@ -181,10 +187,14 @@ exports.getChildrens = (0, express_async_handler_1.default)((req, res, next) => 
     let childCategories = [];
     const aggregateCategories = () => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const rootCategories = yield Category_model_1.default.findById(categoryId).lean();
-            childCategories.push(rootCategories);
-            if (rootCategories.childrens.length > 0) {
-                yield fetchChildren(rootCategories);
+            const rootCategories = yield Category_model_1.default
+                .findById(categoryId)
+                .lean();
+            if (rootCategories) {
+                childCategories.push(rootCategories);
+                if ((rootCategories === null || rootCategories === void 0 ? void 0 : rootCategories.childrens.length) > 0) {
+                    yield fetchChildren(rootCategories);
+                }
             }
             return childCategories;
         }
@@ -196,9 +206,11 @@ exports.getChildrens = (0, express_async_handler_1.default)((req, res, next) => 
     const fetchChildren = (category) => __awaiter(void 0, void 0, void 0, function* () {
         for (let i = 0; i < category.childrens.length; i++) {
             const childId = category.childrens[i];
-            const childCategory = yield Category_model_1.default.findById(childId).lean();
-            childCategories.push(childCategory);
+            const childCategory = yield Category_model_1.default
+                .findById(childId)
+                .lean();
             if (childCategory) {
+                childCategories.push(childCategory);
                 childCategory.childrens = yield fetchChildren(childCategory);
             }
         }

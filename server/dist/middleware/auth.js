@@ -27,19 +27,28 @@ exports.authCheck = (0, express_async_handler_1.default)((req, res, next) => __a
     }
     let token = req.cookies.token;
     let decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
+    // fetching user from database
     const user = (yield User_model_1.default.findById(decoded._id).lean());
-    console.log("🚀 ~ user: ", user);
+    console.log("🚀 ~ user:", user);
     let items = [];
-    for (const item of user === null || user === void 0 ? void 0 : user.cart) {
-        console.log("🚀 ~ item:", item);
-        let product = yield Product_model_1.default.findById(item._id).lean();
+    // populating items in user cart
+    user.cart = user.cart || [];
+    for (const item of user.cart) {
+        let product = yield Product_model_1.default
+            .findById(item._id)
+            .lean();
         if (product) {
-            product.quantity = item.quantity;
-            items.push(product);
+            let productItem = {
+                product: "",
+                quantity: 0,
+            };
+            productItem.product = product;
+            productItem.quantity = item.quantity || 0;
+            console.log("🚀 ~ productItem:", productItem);
+            items.push(productItem);
         }
     }
-    console.log("🚀 ~ items:", items);
-    user === null || user === void 0 ? void 0 : user.cart = items;
+    user.cart = items;
     if (!user) {
         throw new errorHandler_1.default(400, "User not found");
     }

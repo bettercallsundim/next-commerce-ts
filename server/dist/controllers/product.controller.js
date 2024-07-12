@@ -20,7 +20,6 @@ const Product_model_1 = __importDefault(require("../models/Product.model"));
 const cloudinary_1 = require("../utils/cloudinary");
 const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
 exports.createProduct = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("huh ");
     const { name, description, price, category, pictures: images, colors, sizes, stock, } = req.body;
     if (!name ||
         !description ||
@@ -30,16 +29,6 @@ exports.createProduct = (0, express_async_handler_1.default)((req, res, next) =>
         !(stock >= 0)) {
         throw new errorHandler_1.default(400, "All fields are required");
     }
-    console.log("req.body", {
-        name,
-        description,
-        price,
-        category,
-        images,
-        colors,
-        sizes,
-        stock,
-    });
     const product = yield Product_model_1.default.create({
         name,
         description,
@@ -124,7 +113,9 @@ exports.getProduct = (0, express_async_handler_1.default)((req, res, next) => __
     if (!product) {
         throw new errorHandler_1.default(404, "Product not found");
     }
-    let category = yield Category_model_1.default.findById(product.category).lean();
+    let category = yield Category_model_1.default
+        .findById(product.category)
+        .lean();
     let breadcrumbs = [];
     if (category) {
         breadcrumbs.push(category);
@@ -134,7 +125,9 @@ exports.getProduct = (0, express_async_handler_1.default)((req, res, next) => __
     }
     function fetchParents(parentId) {
         return __awaiter(this, void 0, void 0, function* () {
-            let parent = yield Category_model_1.default.findById(parentId).lean();
+            let parent = yield Category_model_1.default
+                .findById(parentId)
+                .lean();
             if (parent) {
                 breadcrumbs.push(parent);
                 if (parent.parent) {
@@ -160,9 +153,11 @@ exports.getProductsByCategory = (0, express_async_handler_1.default)((req, res, 
             const rootCategories = yield Category_model_1.default
                 .findById(req.params.category)
                 .lean();
-            childCategories.push(rootCategories);
-            if (rootCategories.childrens.length > 0) {
-                yield fetchChildren(rootCategories);
+            if (rootCategories) {
+                childCategories.push(rootCategories);
+                if (rootCategories.childrens.length > 0) {
+                    yield fetchChildren(rootCategories);
+                }
             }
             return childCategories;
         }
@@ -174,9 +169,11 @@ exports.getProductsByCategory = (0, express_async_handler_1.default)((req, res, 
     const fetchChildren = (category) => __awaiter(void 0, void 0, void 0, function* () {
         for (let i = 0; i < category.childrens.length; i++) {
             const childId = category.childrens[i];
-            const childCategory = yield Category_model_1.default.findById(childId).lean();
-            childCategories.push(childCategory);
+            const childCategory = yield Category_model_1.default
+                .findById(childId)
+                .lean();
             if (childCategory) {
+                childCategories.push(childCategory);
                 childCategory.childrens = yield fetchChildren(childCategory);
             }
         }

@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler";
 import mongoose from "mongoose";
 import categoryModel from "../models/Category.model";
+import { ICategory } from "../types";
 import { cloudinaryUpload, deleteCloudinaryUpload } from "../utils/cloudinary";
 import OhError from "../utils/errorHandler";
 
@@ -113,7 +114,7 @@ export const getAllCategoriesTree = asyncHandler(
     const aggregateCategories = async () => {
       try {
         // Fetch root categories
-        const rootCategories = await categoryModel
+        const rootCategories: ICategory[] = await categoryModel
           .find({ parent: null })
           .lean();
 
@@ -128,10 +129,12 @@ export const getAllCategoriesTree = asyncHandler(
         throw error;
       }
     };
-    const fetchChildren = async (category) => {
+    const fetchChildren = async (category: ICategory) => {
       for (let i = 0; i < category.childrens.length; i++) {
         const childId = category.childrens[i];
-        const childCategory = await categoryModel.findById(childId).lean();
+        const childCategory: ICategory | null = await categoryModel
+          .findById(childId)
+          .lean();
         if (childCategory) {
           childCategory.childrens = await fetchChildren(childCategory);
           category.childrens[i] = childCategory;
@@ -152,8 +155,10 @@ export const getAllCategoriesTree = asyncHandler(
 export const getBreadcrumbs = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { categoryId } = req.params;
-    let category = await categoryModel.findById(categoryId).lean();
-    let breadcrumbs = [];
+    let category: ICategory | null = await categoryModel
+      .findById(categoryId)
+      .lean();
+    let breadcrumbs: ICategory[] = [];
     if (category) {
       breadcrumbs.push(category);
       if (category.parent) {
@@ -164,7 +169,9 @@ export const getBreadcrumbs = asyncHandler(
     async function fetchParents(
       parentId: mongoose.Schema.Types.ObjectId | string
     ) {
-      let parent = await categoryModel.findById(parentId).lean();
+      let parent: ICategory | null = await categoryModel
+        .findById(parentId)
+        .lean();
       if (parent) {
         breadcrumbs.push(parent);
         if (parent.parent) {
@@ -187,33 +194,39 @@ export const getBreadcrumbs = asyncHandler(
 export const getChildrens = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { categoryId } = req.params;
-    let childCategories = [];
+    let childCategories: ICategory[] = [];
     const aggregateCategories = async () => {
       try {
-        const rootCategories = await categoryModel.findById(categoryId).lean();
-        childCategories.push(rootCategories);
-        if (rootCategories.childrens.length > 0) {
-          await fetchChildren(rootCategories);
+        const rootCategories: ICategory | null = await categoryModel
+          .findById(categoryId)
+          .lean();
+        if (rootCategories) {
+          childCategories.push(rootCategories);
+          if (rootCategories?.childrens.length > 0) {
+            await fetchChildren(rootCategories);
+          }
         }
+
         return childCategories;
       } catch (error) {
         console.error("Error aggregating categories:", error);
         throw error;
       }
     };
-    const fetchChildren = async (category) => {
+    const fetchChildren = async (category: ICategory) => {
       for (let i = 0; i < category.childrens.length; i++) {
         const childId = category.childrens[i];
-        const childCategory = await categoryModel.findById(childId).lean();
-        childCategories.push(childCategory);
+        const childCategory: ICategory | null = await categoryModel
+          .findById(childId)
+          .lean();
         if (childCategory) {
+          childCategories.push(childCategory);
           childCategory.childrens = await fetchChildren(childCategory);
         }
       }
       return category.childrens;
     };
     await aggregateCategories();
-
 
     res.status(200).json({
       success: true,
