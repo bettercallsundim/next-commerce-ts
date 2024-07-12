@@ -3,11 +3,11 @@ import asyncHandler from "express-async-handler";
 import mongoose from "mongoose";
 import categoryModel from "../models/Category.model";
 import productModel from "../models/Product.model";
+import { ICategory, IProduct } from "../types";
 import { deleteCloudinaryUpload } from "../utils/cloudinary";
 import OhError from "../utils/errorHandler";
 export const createProduct = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    console.log("huh ");
     const {
       name,
       description,
@@ -28,16 +28,7 @@ export const createProduct = asyncHandler(
     ) {
       throw new OhError(400, "All fields are required");
     }
-    console.log("req.body", {
-      name,
-      description,
-      price,
-      category,
-      images,
-      colors,
-      sizes,
-      stock,
-    });
+   
     const product = await productModel.create({
       name,
       description,
@@ -151,7 +142,9 @@ export const getProduct = asyncHandler(
     if (!product) {
       throw new OhError(404, "Product not found");
     }
-    let category = await categoryModel.findById(product.category).lean();
+    let category: ICategory | null = await categoryModel
+      .findById(product.category)
+      .lean();
     let breadcrumbs = [];
     if (category) {
       breadcrumbs.push(category);
@@ -163,7 +156,9 @@ export const getProduct = asyncHandler(
     async function fetchParents(
       parentId: mongoose.Schema.Types.ObjectId | string
     ) {
-      let parent = await categoryModel.findById(parentId).lean();
+      let parent: ICategory | null = await categoryModel
+        .findById(parentId)
+        .lean();
       if (parent) {
         breadcrumbs.push(parent);
         if (parent.parent) {
@@ -187,15 +182,17 @@ export const getProduct = asyncHandler(
 
 export const getProductsByCategory = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    let childCategories = [];
+    let childCategories: ICategory[] = [];
     const aggregateCategories = async () => {
       try {
-        const rootCategories = await categoryModel
+        const rootCategories: ICategory | null = await categoryModel
           .findById(req.params.category)
           .lean();
-        childCategories.push(rootCategories);
-        if (rootCategories.childrens.length > 0) {
-          await fetchChildren(rootCategories);
+        if (rootCategories) {
+          childCategories.push(rootCategories);
+          if (rootCategories.childrens.length > 0) {
+            await fetchChildren(rootCategories);
+          }
         }
         return childCategories;
       } catch (error) {
@@ -203,19 +200,22 @@ export const getProductsByCategory = asyncHandler(
         throw error;
       }
     };
-    const fetchChildren = async (category) => {
+    const fetchChildren = async (category: ICategory) => {
       for (let i = 0; i < category.childrens.length; i++) {
         const childId = category.childrens[i];
-        const childCategory = await categoryModel.findById(childId).lean();
-        childCategories.push(childCategory);
+        const childCategory: ICategory | null = await categoryModel
+          .findById(childId)
+          .lean();
         if (childCategory) {
+          childCategories.push(childCategory);
+
           childCategory.childrens = await fetchChildren(childCategory);
         }
       }
       return category.childrens;
     };
     await aggregateCategories();
-    const products = await productModel
+    const products: IProduct[] = await productModel
       .find({
         category: {
           $in: childCategories.map(

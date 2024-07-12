@@ -12,11 +12,6 @@
 import { Request } from "express";
 import { Document, Schema } from "mongoose";
 
-export type CartItem = {
-  proudctId: Schema.Types.ObjectId;
-  quantity: number;
-};
-
 export interface IUser extends Document {
   name: string;
   email: string;
@@ -28,6 +23,50 @@ export interface IUser extends Document {
   orders?: Schema.Types.ObjectId[];
   reviews?: Schema.Types.ObjectId[];
   JWT: () => string;
+}
+
+export interface Order extends Document {
+  products: OrderItem[];
+  user: Schema.Types.ObjectId;
+  address: {
+    type: String;
+    required: [true, "Address is required"];
+  };
+  phone: string;
+  totalPrice: number;
+  orderStatus: OrderStatus;
+  deliveredAt: Date;
+  paidAt: Date;
+}
+
+export interface ICategory extends Document {
+  name: string;
+  description: string;
+  icon: Icon;
+  products: Schema.Types.ObjectId[];
+  parent: Schema.Types.ObjectId | null;
+  childrens: Schema.Types.ObjectId[] | ICategory[];
+}
+
+export interface Review extends Document {
+  user: Schema.Types.ObjectId;
+  product: Schema.Types.ObjectId;
+  rating: number;
+  comment?: string;
+}
+
+export interface IProduct extends Document {
+  name: string;
+  description: string;
+  price: number;
+  category: Schema.Types.ObjectId;
+  images: Image[];
+  colors: Color[];
+  sizes: Size[];
+  stock: number;
+  sold: number;
+  rating: number;
+  reviews: Review[];
 }
 
 export interface IRequest extends Request {
@@ -48,23 +87,28 @@ export enum OrderStatus {
   "Delivered",
   "Cancelled",
 }
-export interface Order extends Document {
-  products: OrderItem[];
-  user: Schema.Types.ObjectId;
-  address: {
-    type: String;
-    required: [true, "Address is required"];
-  };
-  phone: string;
-  totalPrice: number;
-  orderStatus: OrderStatus;
-  deliveredAt: Date;
-  paidAt: Date;
+
+interface Image {
+  url: string;
+  public_id: string;
 }
 
-export interface Review extends Document {
-  user: Schema.Types.ObjectId;
-  product: Schema.Types.ObjectId;
-  rating: number;
-  comment?: string;
+interface Color {
+  name: string;
+  code: string;
 }
+
+interface Size {
+  type: "XS" | "S" | "M" | "L" | "XL" | "XXL";
+}
+
+interface Icon {
+  url: string;
+  public_id: string;
+}
+
+export type CartItem = {
+  product?: string | Schema.Types.ObjectId | IProduct;
+  _id?: string | Schema.Types.ObjectId;
+  quantity: number;
+};

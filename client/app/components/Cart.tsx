@@ -10,17 +10,24 @@ export default function Cart({ open, toggleDrawer }) {
       <div className="w-[300px]">
         {/* @ts-ignore */}
         {cartItems?.map((item) => (
-          <div key={item._id} className="flex justify-between items-center">
+          <div
+            key={item.product?._id}
+            className="flex justify-between items-center"
+          >
             <div>
               <img
                 className="w-[50px] h-[50px] object-cover"
-                src={item?.images?.length > 0 ? item?.images[0]?.url : ""}
+                src={
+                  item?.product?.images?.length > 0
+                    ? item?.product?.images[0]?.url
+                    : ""
+                }
                 alt=""
               />
             </div>
             <div>
-              <p>{item?.name}</p>
-              <p>${item?.price}</p>
+              <p>{item?.product?.name}</p>
+              <p>${item?.product?.price}</p>
             </div>
             <div>
               {/* @ts-ignore */}
