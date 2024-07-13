@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllUser = exports.manageCart = exports.getUser = exports.authPersist = exports.signOut = exports.signIn = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
+const mongoose_1 = __importDefault(require("mongoose"));
 const User_model_1 = __importDefault(require("../models/User.model"));
 const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
 exports.signIn = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -85,7 +86,12 @@ exports.getUser = (0, express_async_handler_1.default)((req, res, next) => __awa
 }));
 exports.manageCart = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
-    const cart = req.body.cart;
+    let cart = req.body.cart;
+    cart = cart.map((item) => ({
+        product: new mongoose_1.default.Types.ObjectId(item.product),
+        quantity: item.quantity,
+    }));
+    console.log("🚀 ~ cart:", cart);
     const user = yield User_model_1.default.findById((_a = req === null || req === void 0 ? void 0 : req.user) === null || _a === void 0 ? void 0 : _a._id);
     if (!user) {
         throw new errorHandler_1.default(404, "User not found");
