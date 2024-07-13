@@ -35,7 +35,7 @@ exports.authCheck = (0, express_async_handler_1.default)((req, res, next) => __a
     user.cart = user.cart || [];
     for (const item of user.cart) {
         let product = yield Product_model_1.default
-            .findById(item._id)
+            .findById(item.product)
             .lean();
         if (product) {
             let productItem = {

@@ -31,7 +31,7 @@ export const authCheck = asyncHandler(
     user.cart = user.cart || [];
     for (const item of user.cart) {
       let product: IProduct | null = await productModel
-        .findById(item._id)
+        .findById(item.product)
         .lean();
       if (product) {
         let productItem: CartItem = {

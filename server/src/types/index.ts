@@ -10,7 +10,7 @@
 //   }
 // }
 import { Request } from "express";
-import { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
 export interface IUser extends Document {
   name: string;
@@ -108,7 +108,7 @@ interface Icon {
 }
 
 export type CartItem = {
-  product?: string | Schema.Types.ObjectId | IProduct;
-  _id?: string | Schema.Types.ObjectId;
+  product?: string | Schema.Types.ObjectId | mongoose.Types.ObjectId | IProduct;
+  _id?: string | Schema.Types.ObjectId | mongoose.Types.ObjectId;
   quantity: number;
 };

@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler";
+import mongoose from "mongoose";
 import userModel from "../models/User.model";
 import { CartItem, IRequest, IUser } from "../types";
 import OhError from "../utils/errorHandler";
@@ -81,11 +82,14 @@ export const getUser = asyncHandler(
   }
 );
 
-
-
 export const manageCart = asyncHandler(
   async (req: IRequest, res: Response, next: NextFunction) => {
-    const cart: CartItem[] | [] = req.body.cart;
+    let cart: CartItem[] | [] = req.body.cart;
+    cart = cart.map((item) => ({
+      product: new mongoose.Types.ObjectId(item.product as string),
+      quantity: item.quantity,
+    }));
+    console.log("🚀 ~ cart:", cart)
 
     const user: IUser | null = await userModel.findById(req?.user?._id);
     if (!user) {
