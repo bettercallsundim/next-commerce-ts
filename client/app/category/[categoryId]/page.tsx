@@ -37,7 +37,7 @@ export default async function page({ params }) {
     categoryDataFn,
     productsByCategoryFn,
   ]);
-  console.log([JSON.stringify(categoryData, null, 2), productsByCategory]);
+  // console.log([JSON.stringify(categoryData, null, 2), productsByCategory]);
   return (
     <Container>
       <Breadcrumb categories={categoryData.breadcrumbs} />

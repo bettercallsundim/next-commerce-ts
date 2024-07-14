@@ -1,7 +1,7 @@
 "use client";
 import { DevTool } from "@hookform/devtools";
 import axios from "axios";
-import { useForm, } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 type Props = {};
 

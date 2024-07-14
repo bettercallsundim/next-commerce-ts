@@ -11,10 +11,10 @@ const SignIn = (props: Props) => {
   const { user } = useZustand();
 
   if (user) {
-    console.log(user, "from sign up");
+    // console.log(user, "from sign up");
   }
   if (error) {
-    console.log(error, "from sign up");
+    // console.log(error, "from sign up");
   }
   return (
     <GoogleLogin

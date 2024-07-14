@@ -1,4 +1,5 @@
 "use client";
+import { successToast } from "@/helpers/toaster";
 import useZustand from "@/hooks/useZustand";
 import { Rating } from "@mui/material";
 import { useRouter } from "next/navigation";
@@ -13,7 +14,7 @@ const Card2 = ({ product }: { product: any }) => {
       onClick={() => {
         router.push("/product/" + product._id);
       }}
-      className="p-4  w-[12rem] rounded-md bg-sky-100 "
+      className="p-4  w-[12rem] rounded-md bg-sky-100 cursor-pointer"
     >
       <div className="text-center">
         <img
@@ -37,14 +38,16 @@ const Card2 = ({ product }: { product: any }) => {
         </p>
         {/* @ts-ignore */}
 
-        <p
-          className="my-0 mt-1"
-          onClick={(e) => {
-            e.stopPropagation();
-            addToCart(product);
-          }}
-        >
-          <DottedButton text="Add To Cart" size="small" />
+        <p className="my-0 mt-1">
+          <DottedButton
+            onClick={(e) => {
+              e.stopPropagation();
+              addToCart(product);
+              successToast("Product Added to Cart");
+            }}
+            text="Add To Cart"
+            size="small"
+          />
         </p>
       </div>
     </div>
