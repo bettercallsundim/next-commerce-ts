@@ -50,8 +50,8 @@ const Categories = (props: Props) => {
     }
   }, [data]);
   useEffect(() => {
-    console.log("🚀 ~ Categories ~ categories:", categories);
-    console.log("🚀 ~ Categories ~ tree:", categoryTree);
+    // console.log("🚀 ~ Categories ~ categories:", categories);
+    // console.log("🚀 ~ Categories ~ tree:", categoryTree);
   }, [categories, categoryTree]);
 
   const VisuallyHiddenInput = styled("input")({
@@ -155,7 +155,6 @@ const Categories = (props: Props) => {
             onClick={async () => {
               console.log(category);
               if (category.name && category.description && category.icon.url) {
-
                 postAxios(category);
                 setCategory({
                   name: "",

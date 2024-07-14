@@ -18,7 +18,7 @@ const UserContext = ({ children }: Props) => {
       });
       if (res.data.success) {
         setUser(res.data.user);
-        console.log(res.data.user.cart, "cart");
+        // console.log(res.data.user.cart, "cart");
         setCart(res.data.user.cart);
       } else {
         throw new Error("User not found");

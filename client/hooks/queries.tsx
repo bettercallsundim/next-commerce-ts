@@ -75,11 +75,9 @@ export const useCreateProduct = () => {
       let res = await axios.post("/product/create", productData, {
         withCredentials: true,
       });
-      console.log(res, "resss");
       return res;
     },
     onSuccess: (data) => {
-      console.log(data, "createProduct data");
     },
   });
   return { createProduct, isPending, error };

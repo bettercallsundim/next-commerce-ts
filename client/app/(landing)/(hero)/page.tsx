@@ -35,7 +35,7 @@ export default function Home() {
             {categories?.map((category) => (
               <Link
                 key={category._id}
-                href="/"
+                href={`/category/${category._id}`}
                 className="category__item text-slate-800 my-2 text-sm flex items-center gap-x-2 hover:underline"
               >
                 <span>

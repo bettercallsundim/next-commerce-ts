@@ -19,9 +19,7 @@ async function updateCart(cart: CartItem[]) {
         withCredentials: true,
       }
     )
-    .then((res) => {
-      console.log(res, "manage cart");
-    });
+    .then((res) => {});
 }
 
 const zustandStore = create<ZustandStates>((set) => ({
@@ -31,11 +29,9 @@ const zustandStore = create<ZustandStates>((set) => ({
   setUser: (user: any) => set({ user }),
   setCart: (cartItems: CartItem[]) => set({ cartItems }),
   addToCart: async (item: any) => {
-    console.log("🚀 ~ addToCart: ~ item:", item);
     let items: CartItem[] | [] = [];
     set((state: any) => {
       items = state.cartItems;
-      console.log("🚀 ~ set ~ items:", items);
       let itemFound = items.findIndex(
         (i: any) => i?.product?._id === item?._id
       );
@@ -61,7 +57,7 @@ const zustandStore = create<ZustandStates>((set) => ({
       items = state.cartItems;
 
       let itemFound = items.findIndex(
-        (i: any) => i?.product?._id === item?.product?._id
+        (i: any) => i?.product?._id === item?._id
       );
       if (itemFound !== -1) {
         if (items[itemFound].quantity > 1) {
@@ -72,9 +68,7 @@ const zustandStore = create<ZustandStates>((set) => ({
           };
         } else {
           return {
-            cartItems: items.filter(
-              (i: any) => i?.product?._id !== item?.product?._id
-            ),
+            cartItems: items.filter((i: any) => i?.product?._id !== item?._id),
             cartItemsNumber: state.cartItemsNumber - 1,
           };
         }

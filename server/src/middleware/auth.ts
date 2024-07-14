@@ -23,7 +23,7 @@ export const authCheck = asyncHandler(
 
     // fetching user from database
     const user = (await userModel.findById(decoded._id).lean()) as IUser;
-    console.log("🚀 ~ user:", user);
+    // console.log("🚀 ~ user:", user);
 
     let items = [];
 
@@ -40,7 +40,7 @@ export const authCheck = asyncHandler(
         };
         productItem.product = product;
         productItem.quantity = item.quantity || 0;
-        console.log("🚀 ~ productItem:", productItem);
+        // console.log("🚀 ~ productItem:", productItem);
         items.push(productItem);
       }
     }

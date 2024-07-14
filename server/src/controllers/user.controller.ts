@@ -89,7 +89,6 @@ export const manageCart = asyncHandler(
       product: new mongoose.Types.ObjectId(item.product as string),
       quantity: item.quantity,
     }));
-    console.log("🚀 ~ cart:", cart)
 
     const user: IUser | null = await userModel.findById(req?.user?._id);
     if (!user) {

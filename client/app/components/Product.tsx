@@ -1,6 +1,8 @@
 "use client";
 "use client";
 import Breadcrumb from "@/app/components/Breadcrumb";
+import { successToast } from "@/helpers/toaster";
+import useZustand from "@/hooks/useZustand";
 import { Button, Rating } from "@mui/material";
 import React from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
@@ -52,6 +54,8 @@ const sampleProduct = {
   reviews: [],
 };
 const Product = ({ product }) => {
+  const { cartItems, addToCart, decreaseFromCart } = useZustand();
+
   return (
     <div className="container mx-auto px-8 py-8">
       <Breadcrumb categories={product.categories} />
@@ -88,11 +92,11 @@ const Product = ({ product }) => {
         </div>
         <div className="introduction">
           <h2 className="title">{product.name}</h2>
-          <p className="rating">
+          <div className="rating">
             {" "}
             <Rating size="small" name="read-only" value={5} readOnly />
-          </p>
-          <p className="flex items-center gap-x-4">
+          </div>
+          <div className="flex items-center gap-x-4">
             {" "}
             <span>
               <span>Brand : </span>
@@ -102,11 +106,11 @@ const Product = ({ product }) => {
               <span>Category : </span>
               <span>Phone</span>
             </span>
-          </p>
+          </div>
           <p>
             Price : <b>${product.price}</b> <del>$ 200</del>
           </p>
-          <p>
+          <div>
             <p>Color</p>
             <p className="flex items-center  gap-x-2 flex-wrap">
               {product.colors.map((col, ind) => (
@@ -121,8 +125,8 @@ const Product = ({ product }) => {
                 </span>
               ))}
             </p>
-          </p>
-          <p>
+          </div>
+          <div>
             <p>Size</p>
             <p className="flex items-center gap-x-2 text-sm flex-wrap">
               {product.sizes.map((size, ind) => (
@@ -131,7 +135,7 @@ const Product = ({ product }) => {
                 </span>
               ))}
             </p>
-          </p>
+          </div>
           <p>
             Quantity :{" "}
             <span className="flex items-center gap-x-4">
@@ -150,7 +154,14 @@ const Product = ({ product }) => {
             <Button variant="contained" color="primary">
               Buy Now
             </Button>
-            <Button variant="contained" color="primary">
+            <Button
+              onClick={() => {
+                addToCart(product);
+                successToast("Product Added to Cart");
+              }}
+              variant="contained"
+              color="primary"
+            >
               Add To Cart
             </Button>
           </p>
