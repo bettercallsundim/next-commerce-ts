@@ -1,10 +1,11 @@
 "use client";
+import { errorToast, successToast } from "@/helpers/toaster";
 import useZustand from "@/hooks/useZustand";
 import Drawer from "@mui/material/Drawer";
 
 export default function Cart({ open, toggleDrawer }) {
   const { cartItems, addToCart, decreaseFromCart } = useZustand();
-  console.log("store.cartItems", cartItems);
+  // console.log("store.cartItems", cartItems);
   return (
     <Drawer anchor="right" open={open} onClose={toggleDrawer("right", false)}>
       <div className="w-[300px]">
@@ -30,11 +31,23 @@ export default function Cart({ open, toggleDrawer }) {
               <p>${item?.product?.price}</p>
             </div>
             <div>
-              {/* @ts-ignore */}
-              <button onClick={() => decreaseFromCart(item)}>-</button>
+              <button
+                onClick={() => {
+                  decreaseFromCart(item?.product);
+                  successToast("Product Removed from Cart");
+                }}
+              >
+                -
+              </button>
               <span>{item?.quantity}</span>
-              {/* @ts-ignore */}
-              <button onClick={() => addToCart(item)}>+</button>
+              <button
+                onClick={() => {
+                  addToCart(item?.product);
+                  successToast("Product Added to Cart");
+                }}
+              >
+                +
+              </button>
             </div>
           </div>
         ))}

@@ -86,7 +86,7 @@ export default function Navbar() {
     setUser(null);
     setAnchorEl(null);
     if (data) {
-      console.log("from logout", data);
+      // console.log("from logout", data);
     }
     if (error) console.log("err logout", error);
   };

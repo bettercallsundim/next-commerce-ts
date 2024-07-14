@@ -29,7 +29,7 @@ exports.authCheck = (0, express_async_handler_1.default)((req, res, next) => __a
     let decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
     // fetching user from database
     const user = (yield User_model_1.default.findById(decoded._id).lean());
-    console.log("🚀 ~ user:", user);
+    // console.log("🚀 ~ user:", user);
     let items = [];
     // populating items in user cart
     user.cart = user.cart || [];
@@ -44,7 +44,7 @@ exports.authCheck = (0, express_async_handler_1.default)((req, res, next) => __a
             };
             productItem.product = product;
             productItem.quantity = item.quantity || 0;
-            console.log("🚀 ~ productItem:", productItem);
+            // console.log("🚀 ~ productItem:", productItem);
             items.push(productItem);
         }
     }

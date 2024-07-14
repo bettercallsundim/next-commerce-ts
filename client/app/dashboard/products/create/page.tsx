@@ -48,13 +48,13 @@ const CreateProduct = (props: Props) => {
         pictures,
       });
     } else {
-      console.log({
-        name,
-        description,
-        price,
-        stock,
-        category: selectedCategory?._id,
-      });
+      // console.log({
+      //   name,
+      //   description,
+      //   price,
+      //   stock,
+      //   category: selectedCategory?._id,
+      // });
     }
   };
   console.log(createProductError, "createProductError");
