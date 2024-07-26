@@ -17,14 +17,14 @@ import OhError, { errorHandler } from "./utils/errorHandler";
 const app = express();
 
 dotenv.config();
-redis
-  .connect()
-  .then(() => {
-    console.log("Redis connected");
-  })
-  .catch((err) => {
-    console.log("Redis connection failed", err);
-  });
+// redis
+//   .connect()
+//   .then(() => {
+//     console.log("Redis connected");
+//   })
+//   .catch((err) => {
+//     console.log("Redis connection failed", err);
+//   });
 
 //middlewares
 app.use(
@@ -63,9 +63,8 @@ app.use("/order", orderRoutes);
 app.use("/review", reviewRoutes);
 
 app.use("*", (req, res, next) => {
-  throw new OhError(400, "Route not exists");
+  throw new OhError(400, "Route does not exists");
 });
-
 
 app.use(errorHandler);
 
