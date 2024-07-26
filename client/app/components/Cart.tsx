@@ -1,11 +1,23 @@
 "use client";
 import { errorToast, successToast } from "@/helpers/toaster";
+import { useThrottle } from "@/hooks/debounce";
 import useZustand from "@/hooks/useZustand";
 import Drawer from "@mui/material/Drawer";
 
 export default function Cart({ open, toggleDrawer }) {
   const { cartItems, addToCart, decreaseFromCart } = useZustand();
-  // console.log("store.cartItems", cartItems);
+
+  function handleAddToCart(product) {
+    addToCart(product);
+    successToast("Product Added to Cart");
+  }
+  function handleDecreaseFromCart(product) {
+    decreaseFromCart(product);
+    successToast("Product Removed from Cart");
+  }
+
+  const throttledAddToCart = useThrottle(handleAddToCart, 3000);
+  const throttledDecreaseFromCart = useThrottle(handleDecreaseFromCart, 3000);
   return (
     <Drawer anchor="right" open={open} onClose={toggleDrawer("right", false)}>
       <div className="w-[300px]">
@@ -33,8 +45,7 @@ export default function Cart({ open, toggleDrawer }) {
             <div>
               <button
                 onClick={() => {
-                  decreaseFromCart(item?.product);
-                  successToast("Product Removed from Cart");
+                  throttledDecreaseFromCart(item?.product);
                 }}
               >
                 -
@@ -42,8 +53,7 @@ export default function Cart({ open, toggleDrawer }) {
               <span>{item?.quantity}</span>
               <button
                 onClick={() => {
-                  addToCart(item?.product);
-                  successToast("Product Added to Cart");
+                  throttledAddToCart(item?.product);
                 }}
               >
                 +

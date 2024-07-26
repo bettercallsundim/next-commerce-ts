@@ -1,5 +1,6 @@
 "use client";
 import { successToast } from "@/helpers/toaster";
+import { useDebouncedClick, useThrottle } from "@/hooks/debounce";
 import useZustand from "@/hooks/useZustand";
 import { Rating } from "@mui/material";
 import { useRouter } from "next/navigation";
@@ -9,6 +10,11 @@ const Card2 = ({ product }: { product: any }) => {
   const { name, description, price, category, images, colors, sizes, stock } =
     product;
   const { addToCart } = useZustand();
+  function handleAddToCart(product) {
+    addToCart(product);
+    successToast("Product Added to Cart");
+  }
+  const throttledAddToCart = useThrottle(handleAddToCart, 3000);
   return (
     <div
       onClick={() => {
@@ -42,8 +48,7 @@ const Card2 = ({ product }: { product: any }) => {
           <DottedButton
             onClick={(e) => {
               e.stopPropagation();
-              addToCart(product);
-              successToast("Product Added to Cart");
+              throttledAddToCart(product);
             }}
             text="Add To Cart"
             size="small"

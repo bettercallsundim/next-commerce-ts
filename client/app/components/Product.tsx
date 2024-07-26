@@ -2,6 +2,7 @@
 "use client";
 import Breadcrumb from "@/app/components/Breadcrumb";
 import { successToast } from "@/helpers/toaster";
+import { useThrottle } from "@/hooks/debounce";
 import useZustand from "@/hooks/useZustand";
 import { Button, Rating } from "@mui/material";
 import React from "react";
@@ -55,6 +56,16 @@ const sampleProduct = {
 };
 const Product = ({ product }) => {
   const { cartItems, addToCart, decreaseFromCart } = useZustand();
+  function handleAddToCart(product) {
+    addToCart(product);
+    successToast("Product Added to Cart");
+  }
+  function handleDecreaseFromCart(product) {
+    decreaseFromCart(product);
+    successToast("Product Removed from Cart");
+  }
+  const throttledAddToCart = useThrottle(handleAddToCart, 3000);
+  const throttledDecreaseFromCart = useThrottle(handleDecreaseFromCart, 3000);
 
   return (
     <div className="container mx-auto px-8 py-8">
@@ -156,8 +167,7 @@ const Product = ({ product }) => {
             </Button>
             <Button
               onClick={() => {
-                addToCart(product);
-                successToast("Product Added to Cart");
+                throttledAddToCart(product);
               }}
               variant="contained"
               color="primary"
