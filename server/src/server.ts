@@ -63,9 +63,16 @@ app.use("/order", orderRoutes);
 app.use("/review", reviewRoutes);
 
 app.use("*", (req, res, next) => {
+<<<<<<< HEAD
   throw new OhError(400, "Route does not exists");
 });
 
+=======
+  throw new OhError(400, "Route not exists");
+});
+
+
+>>>>>>> ca99c0376ef85f3884464c81ab6609ebb133f05f
 app.use(errorHandler);
 
 //db connection

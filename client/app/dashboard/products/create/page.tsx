@@ -192,6 +192,7 @@ const CreateProduct = (props: Props) => {
                     ];
                   });
                 }}
+<<<<<<< HEAD
               />
             </div>
             <input type="submit" />
@@ -199,6 +200,71 @@ const CreateProduct = (props: Props) => {
         </div>
       </div>
       <div className="w-[35%]"></div>
+=======
+              >
+                +
+              </button>
+            </div>
+          </div>
+          <div>
+            <label>Category : </label>
+            <p>
+              <select
+                value={selectedCategory?.name}
+                onChange={(e) => {
+                  const selectedCatJson =
+                    e.target.options[e.target.selectedIndex].getAttribute(
+                      "data-cat"
+                    );
+                  setSelectedCategory(JSON.parse(selectedCatJson));
+                }}
+              >
+                {categoryTree?.categories?.length &&
+                  categoryTree.categories.map((cat: any) => (
+                    <CategoryOption key={cat._id} cat={cat} depth={0} />
+                  ))}
+              </select>
+            </p>
+          </div>
+          <input type="number" placeholder="stock" {...register("stock", {})} />
+          <input type="number" placeholder="sold" {...register("sold", {})} />
+          <div>
+            <label>Pictures : </label>
+            <div className="flex items-center gap-2 flex-wrap">
+              {pictures.map((img) => (
+                <div className="relative" key={img.url}>
+                  <img src={img.url} />
+                  <button
+                    onClick={() => {
+                      setPictures((prev) => {
+                        return prev.filter((pic) => pic.url != img.url);
+                      });
+                    }}
+                    className="absolute top-2 right-2"
+                  >
+                    x
+                  </button>
+                </div>
+              ))}
+            </div>
+            <CloudinaryUploadButton
+              cb={(data) => {
+                setPictures((prev: any) => {
+                  return [
+                    ...prev,
+                    {
+                      url: data.secure_url,
+                      public_id: data.public_id,
+                    },
+                  ];
+                });
+              }}
+            />
+          </div>
+          <input type="submit" />
+        </form>
+      </div>
+>>>>>>> ca99c0376ef85f3884464c81ab6609ebb133f05f
     </Container>
   );
 };
