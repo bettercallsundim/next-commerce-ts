@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { MdDeleteOutline } from "react-icons/md";
 
 type Props = {};
 
@@ -22,16 +23,20 @@ const ColorPicker = ({ col, colors, setColors }) => {
     });
   }, [color, colorName]);
   return (
-    <div className="color-box relative">
+    <div className="color-box relative flex items-center gap-2">
       <input
         type="color"
         value={color}
-        onChange={(e) => setColor(e.target.value)}
+        onChange={(e) => {
+          setColor(e.target.value);
+          setColorName("");
+        }}
       />
       <input
         type="text"
         value={colorName}
         onChange={(e) => setColorName(e.target.value)}
+        className=" rounded px-4 py-2 outline-gray-400 border-gray-300 border border-solid"
       />
       <button
         onClick={() => {
@@ -39,9 +44,9 @@ const ColorPicker = ({ col, colors, setColors }) => {
             return prev.filter((color) => color.code != col.code);
           });
         }}
-        className="absolute top-2 right-2"
+        className="px-4 py-2 rounded outline-gray-400 border-gray-300 border border-solid font-bold"
       >
-        x
+        <MdDeleteOutline />
       </button>
     </div>
   );
