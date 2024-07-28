@@ -21,6 +21,7 @@ const CreateProduct = (props: Props) => {
     handleSubmit,
     formState: { errors },
     control,
+    reset,
   } = useForm();
   const { data: categoryTree, error: categoryError } = useGetCategoriesTree();
 
@@ -37,10 +38,17 @@ const CreateProduct = (props: Props) => {
   const [colors, setColors] = useState([]);
   const { createProduct, error: createProductError } = useCreateProduct();
 
-  const onSubmit = ({ name, description, price, stock }, event) => {
+  const onSubmit = ({ name, description, price, stock, sold }, event) => {
     event.preventDefault();
 
-    if (name && description && price && selectedCategory?._id && stock) {
+    if (
+      name &&
+      description &&
+      price &&
+      selectedCategory?._id &&
+      stock &&
+      pictures.length
+    ) {
       createProduct({
         name,
         description,
@@ -51,6 +59,9 @@ const CreateProduct = (props: Props) => {
         sizes: Object.keys(sizes).filter((size) => sizes[size] != 0),
         pictures,
       });
+      reset({ name: "", description: "", price: 0, stock: 0, sold: 0 });
+      setColors([]);
+      setPictures([]);
     } else {
       // console.log({
       //   name,
@@ -180,15 +191,27 @@ const CreateProduct = (props: Props) => {
                 </select>
               </p>
             </div>
-            <input
+            {/* <input
               type="number"
               placeholder="stock"
               {...register("stock", {})}
+            /> */}
+            <InputMUI
+              name={"stock"}
+              control={control}
+              label={"Stock"}
+              type="number"
             />
-            <input type="number" placeholder="sold" {...register("sold", {})} />
+            {/* <input type="number" placeholder="sold" {...register("sold", {})} /> */}
+            <InputMUI
+              name={"sold"}
+              control={control}
+              label={"Sold"}
+              type="number"
+            />
             <div>
-              <label>Pictures : </label>
-              <div className="flex items-center gap-2 flex-wrap">
+              <label className="">Pictures : </label>
+              <div className="flex items-center gap-2 flex-wrap mt-4">
                 {pictures.map((img) => (
                   <div className="relative" key={img.url}>
                     <img src={img.url} />
@@ -219,7 +242,10 @@ const CreateProduct = (props: Props) => {
                 }}
               />
             </div>
-            <input type="submit" />
+            <input
+              className="bg-violet-400 text-white rounded-md px-4 py-2 cursor-pointer outline-none border-none"
+              type="submit"
+            />
           </form>
         </div>
       </div>

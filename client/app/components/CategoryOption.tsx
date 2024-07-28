@@ -11,9 +11,9 @@ const CategoryOption = ({ cat, depth, setState }: any) => {
       <option
         data-cat={JSON.stringify(cat)}
         value={cat.name}
-        className="inline-block pl-2 ml-2"
+        className="inline-block pl-2 ml-2 "
       >
-        <span className="pl-2 ml-2 inline-block">
+        <span className="pl-2 ml-2 inline-block bg-sky-300 px-4 py-2 rounded-md">
           {generateString(depth * 2, "-")}
           {cat.name}
         </span>

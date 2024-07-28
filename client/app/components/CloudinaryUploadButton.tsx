@@ -8,8 +8,10 @@ type Props = {
 };
 
 const CloudinaryUploadButton = ({ cb }: Props) => {
+  const buttonRef = React.useRef<HTMLButtonElement>(null);
   return (
     <CldUploadButton
+      className="bg-slate-200 rounded-md px-4 py-2 cursor-pointer outline-none border-none"
       onSuccess={(res) => {
         cb(res.info);
       }}

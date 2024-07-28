@@ -4,33 +4,57 @@ import { Controller } from "react-hook-form";
 export const InputMUI = ({
   name,
   control,
-  label,
+  label = "Input",
   rows = 1,
-  type = "text",
+  type,
 }: any) => {
-  return (
-    <Controller
-      name={name}
-      control={control}
-      render={({
-        field: { onChange, value },
-        fieldState: { error },
-        formState,
-      }) => (
-        <TextField
-          helperText={error ? error.message : null}
-          size="small"
-          error={!!error}
-          onChange={onChange}
-          value={value}
-          fullWidth
-          label={label}
-          variant="outlined"
-          multiline={rows > 0}
-          rows={rows > 0 ? rows : null}
-          type={type}
-        />
-      )}
-    />
-  );
+  if (type === "number") {
+    return (
+      <Controller
+        name={name}
+        control={control}
+        render={({
+          field: { onChange, value },
+          fieldState: { error },
+          formState,
+        }) => (
+          <TextField
+            label={label}
+            type="number"
+            size="small"
+            // helperText={error ? error.message : null}
+            // error={!!error}
+            onChange={onChange}
+            value={value}
+            variant="standard"
+          />
+        )}
+      />
+    );
+  } else {
+    return (
+      <Controller
+        name={name}
+        control={control}
+        render={({
+          field: { onChange, value },
+          fieldState: { error },
+          formState,
+        }) => (
+          <TextField
+            helperText={error ? error.message : null}
+            size="small"
+            error={!!error}
+            onChange={onChange}
+            value={value}
+            fullWidth
+            label={label}
+            variant="outlined"
+            multiline={rows > 0}
+            rows={rows > 0 ? rows : null}
+          />
+        )}
+      />
+    );
+  }
 };
