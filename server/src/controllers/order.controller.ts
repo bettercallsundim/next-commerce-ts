@@ -8,6 +8,7 @@ import OhError from "../utils/errorHandler";
 export const createOrder = asyncHandler(
   async (req: IRequest, res: Response, next: NextFunction) => {
     const { products, address, phone } = req.body;
+    console.log("🚀 ~ req.body:", req.body);
     if (!products || !address || !phone) {
       throw new OhError(400, "All fields are required");
     }

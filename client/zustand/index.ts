@@ -5,10 +5,12 @@ import { CartItem } from "./../../server/src/types/index";
 interface ZustandStates {
   cartItemsNumber: number;
   cartItems: CartItem[];
+  checkoutItems: CartItem[];
   user: any;
   setUser: (user: any) => void;
   addToCart: (item: any) => void;
   decreaseFromCart: (item: any) => void;
+  setCheckoutItems: (items:CartItem[]) => void;
 }
 async function updateCart(cart: CartItem[]) {
   await myAxios
@@ -23,9 +25,11 @@ async function updateCart(cart: CartItem[]) {
 }
 
 const zustandStore = create<ZustandStates>((set) => ({
+  user: null,
   cartItemsNumber: 0,
   cartItems: [],
-  user: null,
+  checkoutItems: [],
+
   setUser: (user: any) => set({ user }),
   setCart: (cartItems: CartItem[]) => set({ cartItems }),
   addToCart: async (item: any) => {
@@ -82,5 +86,6 @@ const zustandStore = create<ZustandStates>((set) => ({
     }));
     await updateCart(filteredItems);
   },
+  setCheckoutItems: (checkoutItems: CartItem[]) => set({ checkoutItems }),
 }));
 export default zustandStore;

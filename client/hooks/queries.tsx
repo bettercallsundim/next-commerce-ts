@@ -77,10 +77,40 @@ export const useCreateProduct = () => {
       });
       return res;
     },
-    onSuccess: (data) => {
-    },
+    onSuccess: (data) => {},
   });
   return { createProduct, isPending, error };
+};
+
+export const useCreateOrder = () => {
+  const {
+    mutate: createOrder,
+    isPending,
+    error,
+    isSuccess,
+  } = useMutation({
+    mutationFn: async ({ products, address, phone }: any) => {
+      console.log("🚀 ~ useCreateOrder ~ products:", products);
+      console.log("🚀 ~ useCreateOrder ~ address:", address);
+      console.log("🚀 ~ useCreateOrder ~ phone:", phone);
+      let res = await axios.post(
+        "/order/create",
+        {
+          products,
+          address,
+          phone,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      return res;
+    },
+    onSuccess: (data) => {
+      console.log("🚀 ~ useCreateOrder ~ data:", data);
+    },
+  });
+  return { createOrder, isPending, error };
 };
 
 export { axios as myAxios };
