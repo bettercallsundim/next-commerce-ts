@@ -2,9 +2,10 @@
 import CheckoutItems from "@/app/components/CheckoutItems";
 import Container from "@/app/components/Container";
 import { successToast } from "@/helpers/toaster";
+import { myAxios } from "@/hooks/queries";
 import useZustand from "@/hooks/useZustand";
 import { Button, Checkbox } from "@mui/material";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 type Props = {};
@@ -17,9 +18,29 @@ const Page = (props: Props) => {
     setCheckoutItems: setCheckoutItemsInStore,
   } = useZustand();
   const [checkoutItems, setCheckoutItems] = useState([]);
+  const [listItems, setListItems] = useState(cartItems);
   const [totalPrice, setTotalPrice] = useState(0);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
+  const search = searchParams.get("product");
+  console.log("🚀 ~ Page ~ search:", search);
+  async function fetchProduct(id) {
+    myAxios.get(`/product/${id}`).then((res) => {
+      setListItems([
+        {
+          product: res.data.data,
+          quantity: 1,
+        },
+      ]);
+    });
+  }
+  console.log("🚀 ~ Page ~ checkoutItems:", checkoutItems);
+  useEffect(() => {
+    if (search) {
+      fetchProduct(search);
+    }
+  }, [search]);
   useEffect(() => {
     setCheckoutItemsInStore(checkoutItems);
     let total = 0;
@@ -38,7 +59,7 @@ const Page = (props: Props) => {
           <div>
             <div className="cart bg-slate-100 rounded-lg p-4">
               {" "}
-              {cartItems?.map((item, idx) => (
+              {listItems?.map((item, idx) => (
                 <CheckoutItems
                   key={item.product?._id}
                   item={item}

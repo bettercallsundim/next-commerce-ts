@@ -5,6 +5,7 @@ import { successToast } from "@/helpers/toaster";
 import { useThrottle } from "@/hooks/debounce";
 import useZustand from "@/hooks/useZustand";
 import { Button, Rating } from "@mui/material";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import ImageGallery from "react-image-gallery";
@@ -55,6 +56,7 @@ const sampleProduct = {
   reviews: [],
 };
 const Product = ({ product }) => {
+  const router = useRouter();
   const { cartItems, addToCart, decreaseFromCart } = useZustand();
   function handleAddToCart(product) {
     addToCart(product);
@@ -162,7 +164,11 @@ const Product = ({ product }) => {
             </span>
           </p>
           <p className="flex items-center gap-x-4">
-            <Button variant="contained" color="primary">
+            <Button
+              onClick={() => router.push("/buy-now?product=" + product._id)}
+              variant="contained"
+              color="primary"
+            >
               Buy Now
             </Button>
             <Button

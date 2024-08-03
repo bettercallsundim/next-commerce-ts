@@ -32,7 +32,6 @@ const cors_1 = __importDefault(require("cors"));
 const dotenv = __importStar(require("dotenv"));
 const express_1 = __importDefault(require("express"));
 const helmet_1 = __importDefault(require("helmet"));
-const redis_1 = __importDefault(require("./config/redis"));
 const db_1 = require("./db");
 const categoryRoutes_1 = __importDefault(require("./routes/categoryRoutes"));
 const orderRoutes_1 = __importDefault(require("./routes/orderRoutes"));
@@ -43,14 +42,14 @@ const cloudinary_1 = require("./utils/cloudinary");
 const errorHandler_1 = __importStar(require("./utils/errorHandler"));
 const app = (0, express_1.default)();
 dotenv.config();
-redis_1.default
-    .connect()
-    .then(() => {
-    console.log("Redis connected");
-})
-    .catch((err) => {
-    console.log("Redis connection failed", err);
-});
+// redis
+//   .connect()
+//   .then(() => {
+//     console.log("Redis connected");
+//   })
+//   .catch((err) => {
+//     console.log("Redis connection failed", err);
+//   });
 //middlewares
 app.use((0, cors_1.default)({
     origin: [process.env.FRONTEND],
@@ -81,7 +80,7 @@ app.use("/product", productRoutes_1.default);
 app.use("/order", orderRoutes_1.default);
 app.use("/review", reviewRoutes_1.default);
 app.use("*", (req, res, next) => {
-    throw new errorHandler_1.default(400, "Route not exists");
+    throw new errorHandler_1.default(400, "Route does not exists");
 });
 app.use(errorHandler_1.errorHandler);
 //db connection

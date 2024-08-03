@@ -22,6 +22,7 @@ const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
 exports.createOrder = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     const { products, address, phone } = req.body;
+    console.log("🚀 ~ req.body:", req.body);
     if (!products || !address || !phone) {
         throw new errorHandler_1.default(400, "All fields are required");
     }

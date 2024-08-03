@@ -1,4 +1,5 @@
 "use client";
+import { successToast } from "@/helpers/toaster";
 import useZustand from "@/hooks/useZustand";
 import { SignUp } from "@/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -90,9 +91,6 @@ export const useCreateOrder = () => {
     isSuccess,
   } = useMutation({
     mutationFn: async ({ products, address, phone }: any) => {
-      console.log("🚀 ~ useCreateOrder ~ products:", products);
-      console.log("🚀 ~ useCreateOrder ~ address:", address);
-      console.log("🚀 ~ useCreateOrder ~ phone:", phone);
       let res = await axios.post(
         "/order/create",
         {
@@ -107,7 +105,9 @@ export const useCreateOrder = () => {
       return res;
     },
     onSuccess: (data) => {
-      console.log("🚀 ~ useCreateOrder ~ data:", data);
+      if (data.data.success) {
+        successToast("Order Created");
+      }
     },
   });
   return { createOrder, isPending, error };
