@@ -14,7 +14,7 @@ const responsive = {
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2,
+    items: 1,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
@@ -26,18 +26,18 @@ const responsive = {
 const MultiSlider = memo(({ children }) => {
   return (
     <Carousel
-      swipeable={false}
+      swipeable={true}
       draggable={true}
       showDots={false}
       responsive={responsive}
-      ssr={true} // means to render carousel on server-side.
+      ssr={false} // means to render carousel on server-side.
       infinite={true}
       autoPlay={false}
       autoPlaySpeed={1000}
       keyBoardControl={true}
       customTransition="all .5"
       transitionDuration={500}
-      containerClass="carousel-container"
+      containerClass="carousel-container px-12"
       // removeArrowOnDeviceType={["tablet", "mobile"]}
       // deviceType={this.props.deviceType}
       dotListClass="custom-dot-list-style"

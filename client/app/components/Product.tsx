@@ -11,51 +11,10 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 
-type Props = {};
-const sampleProduct = {
-  _id: {
-    $oid: "66216d8afc13ae5814a24174",
-  },
-  name: "Truffle Paste",
-  description:
-    "Truffle Paste is a is a delicious and healthy food is a delicious and healthy food is a delicious and healthy food  is a delicious and healthy food is a delicious and healthy food is a delicious and healthy food is a delicious and healthy food is a delicious and healthy food is a delicious and healthy food is a delicious and healthy food delicious and healthy food. ",
-  price: 156,
-  category: "Electronics",
-  images: [
-    {
-      url: "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg",
-      public_id: "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg",
-    },
-    {
-      url: "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg",
-      public_id: "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg",
-    },
-    {
-      url: "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg",
-      public_id: "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg",
-    },
-    {
-      url: "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg",
-      public_id: "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg",
-    },
-  ],
-  colors: [
-    {
-      name: "Red",
-      code: "#FF0000",
-    },
-    {
-      name: "Blue",
-      code: "skyblue",
-    },
-  ],
-  sizes: ["M", "L", "XL"],
-  stock: 100,
-  sold: 50,
-  rating: 5,
-  reviews: [],
-};
 const Product = ({ product }) => {
+  console.log("🚀 ~ Product ~ product:", product);
+  let prodCat = product?.categories[product.categories.length - 1].name;
+  console.log("🚀 ~ Product ~ prodCat:", prodCat);
   const router = useRouter();
   const { cartItems, addToCart, decreaseFromCart } = useZustand();
   function handleAddToCart(product) {
@@ -73,7 +32,7 @@ const Product = ({ product }) => {
     <div className="container mx-auto px-8 py-8">
       <Breadcrumb categories={product.categories} />
       <div className="productBox grid grid-cols-1 md:grid-cols-2">
-        <div className="imageGallery sticky  rounded-md">
+        <div className="imageGallery sticky  rounded-md ">
           <ImageGallery
             items={product.images.map((img) => ({
               original: img.url,
@@ -103,7 +62,7 @@ const Product = ({ product }) => {
           />
           ;
         </div>
-        <div className="introduction">
+        <div className="introduction space-y-6 shadow-lg rounded-lg p-8">
           <h2 className="title">{product.name}</h2>
           <div className="rating">
             {" "}
@@ -112,19 +71,20 @@ const Product = ({ product }) => {
           <div className="flex items-center gap-x-4">
             {" "}
             <span>
-              <span>Brand : </span>
+              <span className="font-semibold">Brand : </span>
               <span>Samsung</span>
             </span>
             <span>
-              <span>Category : </span>
-              <span>Phone</span>
+              <span className="font-semibold">Category : </span>
+              <span>{prodCat}</span>
             </span>
           </div>
           <p>
-            Price : <b>${product.price}</b> <del>$ 200</del>
+            <span className="font-semibold">Price :</span>{" "}
+            <span>${product.price}</span> <del>$ 200</del>
           </p>
           <div>
-            <p>Color</p>
+            <p className="font-semibold">Colors</p>
             <p className="flex items-center  gap-x-2 flex-wrap">
               {product.colors.map((col, ind) => (
                 <span
@@ -132,7 +92,7 @@ const Product = ({ product }) => {
                   style={{
                     backgroundColor: col.code,
                   }}
-                  className="rounded-full py-1 px-2 text-white"
+                  className="rounded-full py-1 px-4 text-white text-sm"
                 >
                   {col.name}
                 </span>
@@ -140,7 +100,7 @@ const Product = ({ product }) => {
             </p>
           </div>
           <div>
-            <p>Size</p>
+            <p className="font-semibold">Size</p>
             <p className="flex items-center gap-x-2 text-sm flex-wrap">
               {product.sizes.map((size, ind) => (
                 <span key={size} className="rounded-full py-1 px-4 bg-gray-300">
@@ -150,7 +110,7 @@ const Product = ({ product }) => {
             </p>
           </div>
           <p>
-            Quantity :{" "}
+            <span className="font-semibold">Quantity :</span>
             <span className="flex items-center gap-x-4">
               <Button variant="text" color="primary">
                 -
@@ -182,7 +142,7 @@ const Product = ({ product }) => {
             </Button>
           </p>
           <p>
-            <span>Description : </span> <br />
+            <span className="font-semibold">Description : </span> <br />
             <span>{product.description}</span>
           </p>
         </div>

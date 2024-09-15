@@ -39,9 +39,10 @@ export default function Breadcrumb({ categories }) {
         {categories?.map((cat) => (
           <Link key={cat._id} href={`/category/${cat._id}`}>
             <StyledBreadcrumb
+              className="text-slate-800 font-medium text-base cursor-pointer"
               component="button"
               label={cat.name}
-              icon={<HomeIcon fontSize="small" />}
+              // icon={<HomeIcon fontSize="small" />}
             />
           </Link>
         ))}

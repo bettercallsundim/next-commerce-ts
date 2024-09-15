@@ -20,9 +20,9 @@ li {
   :root {
     --text: #050316;
     --background: #fbfbfe;
-    --primary: #2f27ce;
+    --primary: #425da5;
     --secondary: #dddbff;
-    --accent: #443dff;
+    --accent: #415dbb;
   }
   .dark {
     --text: #eae9fc;

@@ -42,17 +42,25 @@ const Card2 = ({ product }: { product: any }) => {
           <Rating size="small" name="read-only" value={4} readOnly />
           <span className="text-gray-500 text-xs ml-1">( 4320 )</span>
         </p>
-        {/* @ts-ignore */}
 
-        <p className="my-0 mt-1">
-          <DottedButton
+        <p className="mt-4">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              throttledAddToCart(product);
+            }}
+            className="bg-sky-500 text-white rounded-md px-4 py-2 font-bold border-none hover:bg-sky-600 hover:text-white cursor-pointer"
+          >
+            Add To Cart
+          </button>
+          {/* <DottedButton
             onClick={(e) => {
               e.stopPropagation();
               throttledAddToCart(product);
             }}
             text="Add To Cart"
             size="small"
-          />
+          /> */}
         </p>
       </div>
     </div>

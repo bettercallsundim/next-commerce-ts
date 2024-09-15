@@ -1,4 +1,9 @@
 "use client";
+
+
+import Autoplay from "embla-carousel-autoplay";
+import useEmblaCarousel from "embla-carousel-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 const imaged = [
   {
     original: "https://picsum.photos/id/1018/1000/600/",
@@ -17,10 +22,6 @@ const imaged = [
 export const images = imaged.map((itm) => itm.original);
 
 const imageByIndex = (index) => images[index % images.length];
-
-import Autoplay from "embla-carousel-autoplay";
-import useEmblaCarousel from "embla-carousel-react";
-import { useCallback, useEffect, useRef, useState } from "react";
 
 const Carousel = (props) => {
   const { slides, options } = props;

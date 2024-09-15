@@ -25,6 +25,8 @@ const Page = (props: Props) => {
 
   const search = searchParams.get("product");
   console.log("🚀 ~ Page ~ search:", search);
+  console.log("🚀 ~ Page ~ cartItems:", cartItems);
+  console.log("🚀 ~ Page ~ cartItems:", listItems);
   async function fetchProduct(id) {
     myAxios.get(`/product/${id}`).then((res) => {
       setListItems([
@@ -39,8 +41,10 @@ const Page = (props: Props) => {
   useEffect(() => {
     if (search) {
       fetchProduct(search);
+    } else {
+      setListItems(cartItems);
     }
-  }, [search]);
+  }, [search,cartItems]);
   useEffect(() => {
     setCheckoutItemsInStore(checkoutItems);
     let total = 0;
